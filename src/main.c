@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void err(const char *error_message);
 
 int main(int argc, char *argv[])
 {
