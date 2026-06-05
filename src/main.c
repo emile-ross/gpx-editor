@@ -11,11 +11,7 @@ int main(int argc, char *argv[])
 {
 	if (!(argc > 1))
 	{
-		char *error_message_template = "%s expects arguments";
-		size_t error_message_len = 1 + (size_t)snprintf(NULL, 0, error_message_template, program_name);
-		char *error_message = malloc(error_message_len);
-		snprintf(error_message, error_message_len, error_message_template, program_name);
-		err(error_message);
+		err("expected arguments");
 	}
 
 	command_parsing(argc, argv);
@@ -26,12 +22,18 @@ int main(int argc, char *argv[])
 
 void err(const char *error_message)
 {
-	printf("\x1b[31m%s\x1B[0m\n", error_message);
-
 	if (error_message == NULL)
 	{
 		exit(1);
 	}
+
+	char *message_template = "%s: %s"; /* program_name then the message */
+	size_t message_len = 1 + (size_t)snprintf(NULL, 0, message_template, program_name, error_message);
+	char *message = malloc(message_len);
+	snprintf(message, message_len, message_template, program_name, error_message);
+
+	printf("\x1b[31m%s\x1B[0m\n", message);
+
 	exit(1);
 }
 
