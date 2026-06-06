@@ -66,6 +66,29 @@ int command_parsing(int num_args, char *arguments[])
 			{
 				/* -t is total_time
 				 * this flag is not compatible with the "interval time" flag */
+				int time_specific_flags = 0;
+
+				for (int j = i; j < base_arg_index; j++)
+				{
+					if (strcmp(arguments[j], "-S") == 0)
+					{
+						time_specific_flags += 2;
+					}
+					else if (strcmp(arguments[j], "-M") == 0)
+					{
+						time_specific_flags += 2;
+					}
+					else if (strcmp(arguments[j], "-H") == 0)
+					{
+						time_specific_flags += 2;
+					}
+				}
+
+				if (time_specific_flags > 6)
+				{
+					err("Too many arguments");
+				}
+
 				valid_flag_temp = true;
 
 				if (!interval_time_mode)
@@ -94,13 +117,9 @@ int command_parsing(int num_args, char *arguments[])
 					{
 						time_specific_flags += 2;
 					}
-					else if (strcmp(arguments[j], "-H") == 0)
-					{
-						time_specific_flags += 2;
-					}
 				}
 
-				if (time_specific_flags > 6)
+				if (time_specific_flags > 4)
 				{
 					err("Too many arguments");
 				}
