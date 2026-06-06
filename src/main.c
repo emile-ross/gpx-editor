@@ -54,18 +54,23 @@ int command_parsing(int num_args, char *arguments[])
 
 		bool valid_editing_mode = false;
 		bool interval_time_mode = false;
+		bool total_time_mode = false;
 
 		/* checks if the argument is a valid flag 
 		 * loop through all arguments */
 		for (int i = base_args; i < base_arg_index; i++)
 		{
+			bool valid_flag_temp = false;
 			if (strcmp(arguments[i], "-t") == 0)
 			{
 				/* -t is total_time */
-				flag_type_arr[i] = total_time;
+
+				/* this flag is not compatible with the "interval time" flag */
 				if (!interval_time_mode)
 				{
+					flag_type_arr[i] = total_time;
 					valid_editing_mode = true;
+					valid_flag_temp = true;
 				}
 				else
 				{
@@ -74,15 +79,26 @@ int command_parsing(int num_args, char *arguments[])
 			}
 			else if (strcmp(arguments[i], "-i") == 0)
 			{
-				flag_type_arr[i] = interval_time;
-				interval_time_mode = true;
+				if (!total_time_mode)
+				{
+					flag_type_arr[i] = interval_time;
+					interval_time_mode = true;
+					valid_editing_mode = true;
+					valid_flag_temp = true;
+				}
+				else
+				{
+					valid_editing_mode = false;
+				}
 			}
 			else if (strcmp(arguments[i], "-s") == 0)
 			{
+				valid_flag_temp = true;
 				flag_type_arr[i] = start_time;
 			}
 			else if (strcmp(arguments[i], "-c") == 0)
 			{
+				valid_flag_temp = true;
 				flag_type_arr[i] = cap_time;
 			}
 			else
@@ -90,6 +106,20 @@ int command_parsing(int num_args, char *arguments[])
 				/* argument does not match any known flags */
 				flag_type_arr[i] = unknown_flag;
 			}
+			
+			if (!valid_flag_temp)
+			{
+				/* produce error message with the invalid flag */
+				/*
+				err(%s, arguments[i])
+				*/
+				err("Invalid command line argument");
+			}
+		}
+
+		if (valid_editing_mode)
+		{
+			printf("Valid command\n");
 		}
 	}
 	else
