@@ -48,9 +48,12 @@ int command_parsing(int num_args, char *arguments[])
 	}
 
 
-	if (num_args == 2)
+	if (num_args == 2 || num_args == 4 )
 	{
 		int base_arg_index = num_args - 1; /* different from useful_args_n because this is an index to the command */
+
+		bool valid_editing_mode = false;
+		bool interval_time_mode = false;
 
 		/* checks if the argument is a valid flag 
 		 * loop through all arguments */
@@ -60,10 +63,19 @@ int command_parsing(int num_args, char *arguments[])
 			{
 				/* -t is total_time */
 				flag_type_arr[i] = total_time;
+				if (!interval_time_mode)
+				{
+					valid_editing_mode = true;
+				}
+				else
+				{
+					valid_editing_mode = false;
+				}
 			}
 			else if (strcmp(arguments[i], "-i") == 0)
 			{
 				flag_type_arr[i] = interval_time;
+				interval_time_mode = true;
 			}
 			else if (strcmp(arguments[i], "-s") == 0)
 			{
@@ -73,14 +85,12 @@ int command_parsing(int num_args, char *arguments[])
 			{
 				flag_type_arr[i] = cap_time;
 			}
+			else
+			{
+				/* argument does not match any known flags */
+				flag_type_arr[i] = unknown_flag;
+			}
 		}
-
-		/* this means it is a simple command */
-		printf("%s\n", arguments[1]);
-	}
-	else if (num_args == 4)
-	{
-
 	}
 	else
 	{
