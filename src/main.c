@@ -47,8 +47,9 @@ int command_parsing(int num_args, char *arguments[])
 		flag_type_arr[i] = base_flag;
 	}
 
+	int num_usable_args = num_args - base_args;
 
-	if (num_args == 2 || num_args == 4 )
+	if (num_usable_args % 2 == 0)
 	{
 		int base_arg_index = num_args - 1; /* different from useful_args_n because this is an index to the command */
 
@@ -66,11 +67,13 @@ int command_parsing(int num_args, char *arguments[])
 				/* -t is total_time */
 
 				/* this flag is not compatible with the "interval time" flag */
+				valid_flag_temp = true;
+
 				if (!interval_time_mode)
 				{
 					flag_type_arr[i] = total_time;
 					valid_editing_mode = true;
-					valid_flag_temp = true;
+					total_time_mode = true;
 				}
 				else
 				{
