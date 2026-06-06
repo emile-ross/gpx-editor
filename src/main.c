@@ -64,9 +64,8 @@ int command_parsing(int num_args, char *arguments[])
 			bool valid_flag_temp = false;
 			if (strcmp(arguments[i], "-t") == 0)
 			{
-				/* -t is total_time */
-
-				/* this flag is not compatible with the "interval time" flag */
+				/* -t is total_time
+				 * this flag is not compatible with the "interval time" flag */
 				valid_flag_temp = true;
 
 				if (!interval_time_mode)
@@ -85,9 +84,22 @@ int command_parsing(int num_args, char *arguments[])
 				if (!total_time_mode)
 				{
 					flag_type_arr[i] = interval_time;
-					interval_time_mode = true;
-					valid_editing_mode = true;
-					valid_flag_temp = true;
+
+					char *endptr;
+					i++;
+					int interval_time_seconds = (int)strtol(arguments[i], &endptr, 10);
+
+					if (*endptr == '\0')
+					{
+						valid_flag_temp = true;
+						interval_time_mode = true;
+						printf("%d\n", interval_time_seconds);
+						valid_editing_mode = true;
+					}
+					else if (strcmp(arguments[i], endptr) == 0)
+					{
+						printf("You entered no valid numbers\n");
+					}
 				}
 				else
 				{
@@ -113,10 +125,17 @@ int command_parsing(int num_args, char *arguments[])
 			if (!valid_flag_temp)
 			{
 				/* produce error message with the invalid flag */
-				/*
-				err(%s, arguments[i])
-				*/
-				err("Invalid command line argument");
+				char *message_template = "Invalid flag: %s\nat index: %d";
+				size_t message_size = 1 + (size_t)snprintf(NULL, 0, message_template, arguments[i], i);
+
+				char *err_message = malloc(message_size);
+				snprintf(err_message, message_size, message_template, arguments[i], i); /* write to the memory */
+
+				err(err_message); /* display error message */
+
+				exit(1);
+
+				free(err_message);	/* no need to free since the program crashes */
 			}
 		}
 
