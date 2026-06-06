@@ -1,3 +1,4 @@
+/* define flag types (what a flag is used for) */
 enum flag_type
 {
 	base_flag,

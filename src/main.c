@@ -64,6 +64,9 @@ int command_parsing(int num_args, char *arguments[])
 			bool valid_flag_temp = false;
 			if (strcmp(arguments[i], "-t") == 0)
 			{
+
+				/* int time_parsing(int *flag_r_index, base_arg_index, char *argument[]) */
+
 				/* -t is total_time
 				 * this flag is not compatible with the "interval time" flag */
 				int time_specific_flags = 0;
@@ -192,4 +195,11 @@ int command_parsing(int num_args, char *arguments[])
 		err("Invalid number of arguments");
 	}
 	return 0;
+}
+
+int time_parsing(int *flag_r_index, int num_args, char *argument[])
+{
+	int flag_r = *flag_r_index;
+		/* TODO: read arguments and parse */
+	return 1;
 }
