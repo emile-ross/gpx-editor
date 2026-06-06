@@ -81,6 +81,30 @@ int command_parsing(int num_args, char *arguments[])
 			}
 			else if (strcmp(arguments[i], "-i") == 0)
 			{
+				/* i is used here since we start looking for -S flags from the -i flag to the right */
+				int time_specific_flags = 0;
+
+				for (int j = i; j < base_arg_index; j++)
+				{
+					if (strcmp(arguments[j], "-S") == 0)
+					{
+						time_specific_flags += 2;
+					}
+					else if (strcmp(arguments[j], "-M") == 0)
+					{
+						time_specific_flags += 2;
+					}
+					else if (strcmp(arguments[j], "-H") == 0)
+					{
+						time_specific_flags += 2;
+					}
+				}
+
+				if (time_specific_flags > 6)
+				{
+					err("Too many arguments");
+				}
+
 				if (!total_time_mode)
 				{
 					flag_type_arr[i] = interval_time;
@@ -106,12 +130,12 @@ int command_parsing(int num_args, char *arguments[])
 					valid_editing_mode = false;
 				}
 			}
-			else if (strcmp(arguments[i], "-s") == 0)
+			else if (strcmp(arguments[i], "--start-time") == 0)
 			{
 				valid_flag_temp = true;
 				flag_type_arr[i] = start_time;
 			}
-			else if (strcmp(arguments[i], "-c") == 0)
+			else if (strcmp(arguments[i], "--cap-time") == 0)
 			{
 				valid_flag_temp = true;
 				flag_type_arr[i] = cap_time;
