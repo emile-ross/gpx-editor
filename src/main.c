@@ -201,11 +201,18 @@ int time_parsing(int *flag_r_index, int num_args, char *argument[])
 {
 	int flag_r = *flag_r_index;
 
+	int duration = 0;
+
 	for (int i = flag_r; i < num_args; i++)
 	{
 		/* TODO: read arguments and parse */
+
+		char *endptr = NULL;
+
 		if (strcmp(argument[i], "-S") == 0)
 		{
+			int seconds = (int)strtol(argument[i], &endptr, 10);
+			duration += seconds;
 			i += 2;
 		}
 		else if (strcmp(argument[i], "-M") == 0)
