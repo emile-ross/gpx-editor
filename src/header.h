@@ -6,3 +6,7 @@
 #include "enums.h"
 
 extern char *program_name;
+
+void err(const char *error_message);
+int command_parsing(int num_args, char *arguments[]);
+
