@@ -217,10 +217,14 @@ int time_parsing(int *flag_r_index, int num_args, char *argument[])
 		}
 		else if (strcmp(argument[i], "-M") == 0)
 		{
+			int minutes = (int)strtol(argument[i], &endptr, 10);
+			duration += (minutes * 60);
 			i += 2;
 		}
 		else if (strcmp(argument[i], "-H") == 0)
 		{
+			int hours = (int)strtol(argument[i], &endptr, 10);
+			duration += (hours * 3600);
 			i += 2; 
 		}
 	}
