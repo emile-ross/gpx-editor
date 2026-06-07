@@ -200,6 +200,24 @@ int command_parsing(int num_args, char *arguments[])
 int time_parsing(int *flag_r_index, int num_args, char *argument[])
 {
 	int flag_r = *flag_r_index;
+
+	for (int i = flag_r; i < num_args; i++)
+	{
 		/* TODO: read arguments and parse */
+		if (strcmp(argument[i], "-S") == 0)
+		{
+			i += 2;
+		}
+		else if (strcmp(argument[i], "-M") == 0)
+		{
+			i += 2;
+		}
+		else if (strcmp(argument[i], "-H") == 0)
+		{
+			i += 2; 
+		}
+	}
+
+
 	return 1;
 }
