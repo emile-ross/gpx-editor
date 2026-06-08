@@ -8,8 +8,6 @@ int time_parsing(int *flag_r_index, int num_args, char *argument[])
 
 	for (int i = flag_r; i < num_args; i++)
 	{
-		/* TODO: read arguments and parse */
-
 		char *endptr = NULL;
 
 		if (strcmp(argument[i], "-S") == 0)
@@ -28,6 +26,11 @@ int time_parsing(int *flag_r_index, int num_args, char *argument[])
 			i++; /* read ahead */
 			int hours = (int)strtol(argument[i], &endptr, 10);
 			duration += (hours * 3600);
+		}
+
+		if (*endptr != '\0')
+		{
+			printf("error converting \"%s\" to a number\n", endptr);
 		}
 	}
 

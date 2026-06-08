@@ -28,9 +28,7 @@ int command_parsing(int num_args, char *arguments[])
 			bool valid_flag_temp = false;
 			if (strcmp(arguments[i], "-t") == 0)
 			{
-
-				/* int time_parsing(int *flag_r_index, base_arg_index, char *argument[]) */
-
+				time_parsing(&i, base_arg_index, arguments);
 				/* -t is total_time
 				 * this flag is not compatible with the "interval time" flag */
 				int time_specific_flags = 0;
