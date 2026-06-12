@@ -4,12 +4,20 @@ char *program_name = "medit";
 
 int main(int argc, char *argv[])
 {
+	bool used_args[argc];
+	for (int i = 0; i < argc; i++)
+	{
+		used_args[i] = false;
+	}
+
+	used_args[0] = true;
+
 	if (!(argc > 1))
 	{
 		err("expected arguments");
 	}
 
-	command_parsing(argc, argv);
+	command_parsing(used_args, argc, argv);
 
 	return 0; /* c90 return value */
 }
