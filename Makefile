@@ -1,9 +1,12 @@
 FLAGS = -Wconversion -Wall -Wextra -std=c99 -Wpedantic
+Z = zig cc
 
 cmd = src/main.c src/command_parsing.c src/time_parsing.c -o medit 
 
+zig: 
+	$(Z) $(cmd) $(FLAGS)
 base: 
-	zig cc $(cmd) $(FLAGS) -Werror
+	$(Z) $(cmd) $(FLAGS) -Werror
 
 install: base
 	sudo cp -f medit /usr/bin/
