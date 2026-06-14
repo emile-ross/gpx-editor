@@ -31,6 +31,7 @@ int time_parsing(int *flag_r_index, int num_args, char *argument[])
 			duration += (hours * 3600);
 			valid_arg = true;
 		}
+
 		if (valid_arg)
 		{
 			if (*endptr != '\0')
