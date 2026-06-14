@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 		err("expected arguments");
 	}
 
-	command_parsing(used_args, argc, argv);
+	command_parsing(argc, argv);
 
 	return 0; /* c90 return value */
 }

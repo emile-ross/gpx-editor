@@ -7,7 +7,7 @@
 
 /* global variables */
 	extern const char *program_name;
-	const bool verbose;
+	extern const bool verbose;
 
 void err(const char *error_message);
 int command_parsing(int num_args, char *arguments[]);
