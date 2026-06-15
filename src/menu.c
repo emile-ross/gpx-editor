@@ -73,3 +73,30 @@ void date_input(void)
 		}
 	}
 }
+
+int get_time(int upper_bound, int lower_bound, char *date_type)
+{
+	clear();
+
+	printf("Defining \"%s\"\n", date_type);
+
+	printf("The number has to be between %d and %d\n", lower_bound, upper_bound);
+
+	char input_buffer[128];
+	char *endptr;
+
+	if (fgets(input_buffer, sizeof(input_buffer), stdin) == NULL)
+	{
+		printf("Failed to parse input.\n");
+		exit(-1);
+	}
+
+	long date_input;
+	date_input = strtol(buffer, &endptr, 10);
+
+	if (date_input < lower_bound ||  date_input > upper_bound)
+	{
+		printf("Invalid date input\n");
+		exit(-1);
+	}
+}
