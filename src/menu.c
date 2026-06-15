@@ -14,6 +14,7 @@ void date_input(void)
 
 	while (choice != 0)
 	{
+		clear();
 		if (first_input)
 		{
 			printf("The time is set to the current time by default\n");
@@ -35,6 +36,7 @@ void date_input(void)
 		char buffer[100];
 		char *endptr;
 		long choice_temp = -1;
+
 
 		if (fgets(buffer, sizeof(buffer), stdin) == NULL)
 		{
@@ -74,29 +76,46 @@ void date_input(void)
 	}
 }
 
-int get_time(int upper_bound, int lower_bound, char *date_type)
+long get_time(int upper_bound, int lower_bound, char *date_type)
 {
-	clear();
-
-	printf("Defining \"%s\"\n", date_type);
-
-	printf("The number has to be between %d and %d\n", lower_bound, upper_bound);
-
-	char input_buffer[128];
-	char *endptr;
-
-	if (fgets(input_buffer, sizeof(input_buffer), stdin) == NULL)
-	{
-		printf("Failed to parse input.\n");
-		exit(-1);
-	}
-
+	bool valid_date = false;
 	long date_input;
-	date_input = strtol(buffer, &endptr, 10);
 
-	if (date_input < lower_bound ||  date_input > upper_bound)
+	while (!valid_date)
 	{
-		printf("Invalid date input\n");
-		exit(-1);
+		clear();
+
+		printf("Defining \"%s\"\n", date_type);
+
+		printf("The number has to be between %d and %d\n", lower_bound, upper_bound);
+
+		char input_buffer[128];
+		char *endptr;
+
+		if (fgets(input_buffer, sizeof(input_buffer), stdin) == NULL)
+		{
+			printf("Failed to parse input.\n");
+			exit(-1);
+		}
+		else
+		{
+			valid_date = true;
+		}
+
+		date_input = strtol(input_buffer, &endptr, 10);
+
+        	if (endptr == input_buffer)
+		{
+			fprintf(stderr, "No valid characters found");
+			valid_date = false;
+		}
+
+		if (date_input < lower_bound ||  date_input > upper_bound)
+		{
+			fprintf(stderr, "Invalid date input\n");
+			valid_date = false;
+		}
 	}
+
+	return date_input;
 }
