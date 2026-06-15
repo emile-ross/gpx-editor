@@ -12,6 +12,8 @@
 	extern const char *program_name;
 	extern const bool verbose;
 
+
+void clear(void);
 void err(const char *error_message);
 int command_parsing(int num_args, char *arguments[]);
 int time_parsing(int *flag_r_index, int num_args, char *argument[]);

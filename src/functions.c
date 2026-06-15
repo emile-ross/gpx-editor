@@ -13,3 +13,8 @@ void stotime(int total_seconds, int *hours, int *minutes, int *seconds)
 	*hours = hours_temp / 3600;
 }
 
+void clear(void)
+{
+	/* This ANSI sequence clears the screen */
+	printf("\033[2J\033[H");
+}
