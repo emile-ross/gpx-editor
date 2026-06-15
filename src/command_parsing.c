@@ -22,9 +22,19 @@ int command_parsing(int num_args, char *arguments[])
 			{
 				printf("total time mode\n");
 			}
+
 			int total_time_input = time_parsing(&i, num_args, arguments);
 			final_time = total_time_input;
 			printf("total time specified is: %d\n", total_time_input);
+		}
+		else if (strcmp(arguments[i], "--start-time") == 0 || strcmp(arguments[i], "-s") == 0)
+		{
+			if (verbose)
+			{
+				printf("start time\n");
+			}
+
+
 		}
 	}
 
