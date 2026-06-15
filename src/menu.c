@@ -1,6 +1,6 @@
 #include "header.h"
 
-void date_input(int *year, int *month, int *day, int *hour, int *minute, int *second)
+void date_input(void)
 {
 	bool first_input = true;
 
@@ -24,15 +24,37 @@ void date_input(int *year, int *month, int *day, int *hour, int *minute, int *se
 		
 		printf("Date: %s\n", time_string);
 
-		printf("Edit Year:   1\n");
-		printf("Edit Month:  2\n");
-		printf("Edit Day:    3\n");
-		printf("Edit Hours:  4\n");
-		printf("Edit Minute: 5\n");
-		printf("Edit Second: 6\n");
-		printf("\nDone:  0\n");
+		printf("Edit Year:    1\n");
+		printf("Edit Months:  2\n");
+		printf("Edit Days:    3\n");
+		printf("Edit Hours:   4\n");
+		printf("Edit Minutes: 5\n");
+		printf("Edit Seconds: 6\n");
+		printf("\nSave and exit:  0\n");
 
 		scanf("%d", &choice);
 
+		switch (choice)
+		{
+			case 1:
+				printf("Year\n");
+				break;
+
+			case 2:
+				printf("Months\n");
+				break;
+				
+			case 3:
+				printf("Days\n");
+				break;
+
+			case 4:
+				printf("Hours\n");
+				break;
+
+			default:
+				printf("error\n");
+				break;
+		}
 	}
 }

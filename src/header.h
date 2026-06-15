@@ -18,4 +18,4 @@ int time_parsing(int *flag_r_index, int num_args, char *argument[]);
 
 void stotime(int total_seconds, int *hours, int *minutes, int *seconds);
 
-void date_input(int *year, int *month, int *day, int *hour, int *minute, int *second);
+void date_input(void);
