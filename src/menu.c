@@ -32,7 +32,22 @@ void date_input(void)
 		printf("Edit Seconds: 6\n");
 		printf("\nSave and exit:  0\n");
 
-		scanf("%d", &choice);
+		char buffer[100];
+		char *endptr;
+		long choice_temp = -1;
+
+		if (fgets(buffer, sizeof(buffer), stdin) == NULL)
+		{
+			printf("Failed to parse input.\n");
+			exit(-1);
+		}
+
+		choice_temp = strtol(buffer, &endptr, 10);
+
+		if (!(choice_temp > 6 || choice_temp < 0))
+		{
+			choice = (int)choice_temp;
+		}
 
 		switch (choice)
 		{

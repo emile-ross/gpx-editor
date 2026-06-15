@@ -1,4 +1,4 @@
-FLAGS = -Wconversion -Wall -Wextra -std=c99 -Wpedantic
+FLAGS = -Wconversion -Wall -Wextra -std=c99 -Wpedantic -Wshadow
 Z = zig cc
 
 cmd = src/menu.c src/functions.c src/main.c src/command_parsing.c src/time_parsing.c -o medit 
