@@ -1,3 +1,5 @@
+#define _POSIX_C_SOURCE 199309L
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,3 +24,5 @@ void stotime(int total_seconds, int *hours, int *minutes, int *seconds);
 
 void date_input(void);
 long get_time(int lower_bound, int upper_bound, char *date_type);
+
+void wait(int quarters_seconds, int num_seconds);

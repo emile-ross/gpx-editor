@@ -118,20 +118,18 @@ long get_time(int lower_bound, int upper_bound, char *date_type)
 
 		if (fgets(input_buffer, sizeof(input_buffer), stdin) == NULL)
 		{
-			printf("Failed to parse input.\n");
+			fprintf(stderr, "Failed to parse input.\n");
 		}
 
 		date_input = strtol(input_buffer, &endptr, 10);
 
         	if (*endptr != '\n' && *endptr != '\0')
 		{
-			fprintf(stderr, "No valid characters found");
-			getchar();
+			fprintf(stderr, "No valid characters found\n");
 		}
 		else if (date_input < lower_bound ||  date_input > upper_bound)
 		{
 			fprintf(stderr, "Invalid date input\n");
-			getchar();
 		}
 		else
 		{
@@ -140,21 +138,21 @@ long get_time(int lower_bound, int upper_bound, char *date_type)
 	}
 }
 
-void wait(int timer_quarters, int timer_seconds)
+void wait(int quarters_seconds, int num_seconds)
 {
 	struct timespec install_timer;
 	long int time_timer_quarters;
 	long int time_timer_seconds;
 
-	if (timer_quarters < 4) /* 4 quarters per second */
+	if (quarters_seconds < 4) /* 4 quarters per second */
 	{
-		time_timer_quarters = timer_quarters * 250000000;   /* convert quarters to nanoseconds */
-		time_timer_seconds = timer_seconds;		    /* set seconds */
+		time_timer_quarters = quarters_seconds * 250000000;   /* convert quarters to nanoseconds */
+		time_timer_seconds = num_seconds;		    /* set seconds */
 	}
 	else
 	{
 		time_timer_quarters = 0;
-		time_timer_seconds = timer_seconds + 1;	/* adds 1 second if 4 >= quarters */
+		time_timer_seconds = num_seconds + 1;	/* adds 1 second if 4 >= quarters */
 	}
 
 	install_timer.tv_nsec = time_timer_quarters;
