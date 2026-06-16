@@ -34,12 +34,12 @@ void date_input(void)
 		printf("Edit Hours:   4\n");
 		printf("Edit Minutes: 5\n");
 		printf("Edit Seconds: 6\n");
+
 		printf("\nSave and exit:  0\n");
 
 		char buffer[100];
 		char *endptr;
 		long choice_temp = -1;
-
 
 		if (fgets(buffer, sizeof(buffer), stdin) == NULL)
 		{
@@ -55,41 +55,44 @@ void date_input(void)
 			valid_choice = true;
 		}
 
-		long date = -1;
+		int date = -1;
 		switch (choice)
 		{
 			case 1:
 				date = get_time(1900, 3000, "year");
+				final_time->tm_year = date;
 				break;
 
 			case 2:
 				date = get_time(1, 12, "months");
+				final_time->tm_mon = date - 1;
 				break;
 				
 			case 3:
 				date = get_time(1, 31, "days");
+				final_time->tm_mday = date;
 				break;
 
 			case 4:
 				date = get_time(0, 23, "hours");
+				final_time->tm_hour = date;
 				break;
 
 			case 5:
 				date = get_time(0, 59, "minutes");
+				final_time->tm_min = date;
 				break;
 
 			case 6:
 				date = get_time(0, 59, "seconds");
+				final_time->tm_sec = date;
 				break;
 
 			default:
 				valid_choice = false;
 				break;
 		}
-
-
-
-		printf("%ld\n", date);
+		printf("%d\n", date);
 
 		if (valid_choice)
 		{
@@ -98,20 +101,23 @@ void date_input(void)
 	}
 }
 
-long get_time(int lower_bound, int upper_bound, char *date_type)
+int get_time(int lower_bound, int upper_bound, char *date_type)
 {
 	long date_input;
 
 	int i = 0;
 	while (1)
 	{
-		i++;
 		clear();
 
-		printf("%d\n", i);
 		printf("Defining \"%s\"\n", date_type);
 
 		printf("The number has to be between %d and %d\n", lower_bound, upper_bound);
+
+		if (i > 5)
+		{
+			printf("Make sure your number respects the bounds specified above\n");
+		}
 
 		char input_buffer[128];
 		char *endptr;
@@ -127,14 +133,19 @@ long get_time(int lower_bound, int upper_bound, char *date_type)
 		{
 			fprintf(stderr, "No valid characters found\n");
 		}
+		else if (date_input < INT_MIN || date_input > INT_MAX)
+		{
+			fprintf(stderr, "Invalid date input\n");
+		}
 		else if (date_input < lower_bound ||  date_input > upper_bound)
 		{
 			fprintf(stderr, "Invalid date input\n");
 		}
 		else
 		{
-			return date_input;
+			return (int)date_input;
 		}
+		i++;
 	}
 }
 
