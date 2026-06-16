@@ -139,3 +139,25 @@ long get_time(int lower_bound, int upper_bound, char *date_type)
 		}
 	}
 }
+
+void wait(int timer_quarters, int timer_seconds)
+{
+	struct timespec install_timer;
+	long int time_timer_quarters;
+	long int time_timer_seconds;
+
+	if (timer_quarters < 4) /* 4 quarters per second */
+	{
+		time_timer_quarters = timer_quarters * 250000000;   /* convert quarters to nanoseconds */
+		time_timer_seconds = timer_seconds;		    /* set seconds */
+	}
+	else
+	{
+		time_timer_quarters = 0;
+		time_timer_seconds = timer_seconds + 1;	/* adds 1 second if 4 >= quarters */
+	}
+
+	install_timer.tv_nsec = time_timer_quarters;
+    	install_timer.tv_sec = time_timer_seconds;
+    	nanosleep(&install_timer, NULL);
+}
