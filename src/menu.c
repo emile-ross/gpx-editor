@@ -59,8 +59,8 @@ void date_input(void)
 		switch (choice)
 		{
 			case 1:
-				date = get_time(1900, 3000, "year");
-				final_time->tm_year = date;
+				date = get_time(1900, 2147483647, "year");
+				final_time->tm_year = date - 1900;
 				break;
 
 			case 2:
@@ -145,6 +145,7 @@ int get_time(int lower_bound, int upper_bound, char *date_type)
 		{
 			return (int)date_input;
 		}
+
 		i++;
 	}
 }
