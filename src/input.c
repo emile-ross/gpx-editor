@@ -4,14 +4,13 @@
 int get_time(int lower_bound, int upper_bound, char *date_type)
 {
 	long date_input;
-
 	int i = 0;
+
 	while (1)
 	{
 		clear();
 
 		printf("Defining \"%s\"\n", date_type);
-
 		printf("The number has to be between %d and %d\n", lower_bound, upper_bound);
 
 		if (i > 5)

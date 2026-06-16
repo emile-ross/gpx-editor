@@ -29,6 +29,8 @@ int command_parsing(int num_args, char *arguments[])
 		}
 		else if (strcmp(arguments[i], "--start-time") == 0 || strcmp(arguments[i], "-s") == 0)
 		{
+			date_input();
+
 			if (verbose)
 			{
 				printf("start time\n");
