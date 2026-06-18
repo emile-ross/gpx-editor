@@ -30,13 +30,7 @@ int command_parsing(int num_args, char *arguments[])
 		else if (strcmp(arguments[i], "--start-time") == 0 || strcmp(arguments[i], "-s") == 0)
 		{
 			struct tm date = date_input();
-
-			char *time_string = malloc((size_t)max_time_len);
-			strftime(time_string, (size_t)max_time_len, "%Y-%m-%d %H:%M:%S", &date);
-
-			printf("%s\n", time_string);
-			free(time_string);
-
+			display_time(&date);	/* pass in the date struct to the display_time function */
 
 			if (verbose)
 			{
@@ -45,7 +39,8 @@ int command_parsing(int num_args, char *arguments[])
 		}
 		else if (strcmp(arguments[i], "--end-time") == 0 || strcmp(arguments[i], "-e") == 0)
 		{
-			date_input();
+			struct tm date = date_input();
+			display_time(&date);	/* pass in the date struct to the display_time function */
 
 			if (verbose)
 			{

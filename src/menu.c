@@ -101,3 +101,16 @@ struct tm date_input(void)
 	}
 	return *final_time;
 }
+
+void display_time(struct tm *date)
+{
+	/* max_time_len is defined in the header file
+	 * it is an arbitrary number of bytes since the strftime 
+	 * function doesn't allow buffer size calculation 
+	 * (like snprintf does) */ 
+	char *time_message = malloc((size_t)max_time_len);
+	strftime(time_message, (size_t)max_time_len, "%Y-%m-%d %H:%M:%S", date);
+	
+	printf("%s\n", time_message);
+	free(time_message);
+}
