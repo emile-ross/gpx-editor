@@ -31,6 +31,13 @@ int command_parsing(int num_args, char *arguments[])
 		{
 			struct tm date = date_input();
 
+			char *time_string = malloc((size_t)max_time_len);
+			strftime(time_string, (size_t)max_time_len, "%Y-%m-%d %H:%M:%S", &date);
+
+			printf("%s\n", time_string);
+			free(time_string);
+
+
 			if (verbose)
 			{
 				printf("start time\n");
