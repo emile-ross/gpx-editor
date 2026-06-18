@@ -1,6 +1,6 @@
 #include "header.h"
 
-void date_input(void)
+struct tm date_input(void)
 {
 	bool first_input = true;
 
@@ -99,4 +99,5 @@ void date_input(void)
 			first_input = false;
 		}
 	}
+	return *final_time;
 }

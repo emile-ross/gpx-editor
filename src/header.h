@@ -22,7 +22,7 @@ int time_parsing(int *flag_r_index, int num_args, char *argument[]);
 
 void stotime(int total_seconds, int *hours, int *minutes, int *seconds);
 
-void date_input(void);
+struct tm date_input(void);
 int get_time(int lower_bound, int upper_bound, char *date_type);
 
 void wait(int quarters_seconds, int num_seconds);
