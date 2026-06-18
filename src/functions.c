@@ -19,24 +19,21 @@ void clear(void)
 	printf("\033[2J\033[H");
 }
 
-void wait(int quarters_seconds, int num_seconds)
+void wait(long quarters, long seconds)
 {
-	struct timespec install_timer;
-	long int time_timer_quarters;
-	long int time_timer_seconds;
-
-	if (quarters_seconds < 4)	/* 4 quarters per second */
+	if (quarters > 0 && quarters < 4)	/* 4 quarters per second */
 	{
-		time_timer_quarters = quarters_seconds * 250000000;	/* convert quarters to nanoseconds */
-		time_timer_seconds = num_seconds;			/* set seconds */
+		quarters *= 250000000;	/* convert quarters to nanoseconds */
 	}
 	else
 	{
-		time_timer_quarters = 0;
-		time_timer_seconds = num_seconds + 1;	/* adds 1 second if 4 >= quarters */
+		quarters = 0;
+		seconds += 1;	/* adds 1 second if 4 >= quarters */
 	}
 
-	install_timer.tv_nsec = time_timer_quarters;
-    	install_timer.tv_sec = time_timer_seconds;
+	struct timespec install_timer;
+	/* write to timespec struct */
+	install_timer.tv_nsec = quarters;
+    	install_timer.tv_sec = seconds;
     	nanosleep(&install_timer, NULL);
 }
