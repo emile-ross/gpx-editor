@@ -25,6 +25,6 @@ void stotime(int total_seconds, int *hours, int *minutes, int *seconds);
 struct tm date_input(void);
 int get_time(int lower_bound, int upper_bound, char *date_type);
 
-void wait(int quarters_seconds, int num_seconds);	/* waits for a certain time */
+void wait(long quarters, long seconds);	/* waits for a certain time */
 
 void display_time(struct tm *date);

@@ -35,5 +35,6 @@ void wait(long quarters, long seconds)
 	/* write to timespec struct */
 	install_timer.tv_nsec = quarters;
     	install_timer.tv_sec = seconds;
-    	nanosleep(&install_timer, NULL);
+
+    	nanosleep(&install_timer, NULL);	/* execute nanosleep function and pass in the timespect struct */
 }
