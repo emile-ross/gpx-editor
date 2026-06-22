@@ -2,8 +2,6 @@
 
 const char *program_name = "medit";
 
-const bool verbose = false;
-
 int main(int argc, char *argv[])
 {
 	if (!(argc > 1))

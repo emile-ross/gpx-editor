@@ -14,6 +14,7 @@
 /* global variables */
 	extern const char *program_name;
 	extern const bool verbose;
+	extern const bool ignore_errors;
 
 void clear(void);
 void err(const char *error_message);
