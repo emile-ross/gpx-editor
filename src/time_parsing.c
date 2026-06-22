@@ -1,5 +1,7 @@
 #include "header.h"
 
+void parsing_fail(char *time_type_msg);
+
 int time_parsing(int *flag_r_index, int num_args, char *argument[])
 {
 	int flag_r = *flag_r_index;
@@ -23,8 +25,7 @@ int time_parsing(int *flag_r_index, int num_args, char *argument[])
 			}
 			else
 			{
-				fprintf(stderr, "Failed to convert input to time\n");
-				exit(1);
+				parsing_fail("seconds");
 			}
 
 		}
@@ -34,7 +35,14 @@ int time_parsing(int *flag_r_index, int num_args, char *argument[])
 			/* convert minutes to seconds */
 			int minutes = (int)strtol(argument[i], &endptr, 10);
 			duration += (minutes * 60);
-			valid_arg = true;
+			if (conversion_check(&endptr, argument[i], false) == 0)
+			{
+				valid_arg = true;
+			}
+			else
+			{
+				parsing_fail("minutes");
+			}
 		}
 		else if (strcmp(argument[i], "-H") == 0)
 		{
@@ -42,7 +50,14 @@ int time_parsing(int *flag_r_index, int num_args, char *argument[])
 			/* convert hours to seconds */
 			int hours = (int)strtol(argument[i], &endptr, 10);
 			duration += (hours * 3600);
-			valid_arg = true;
+			if (conversion_check(&endptr, argument[i], false) == 0)
+			{
+				valid_arg = true;
+			}
+			else
+			{
+				parsing_fail("hours");
+			}
 		}
 
 		if (valid_arg)
@@ -57,3 +72,11 @@ int time_parsing(int *flag_r_index, int num_args, char *argument[])
 	return duration;
 }
 
+
+void parsing_fail(char *time_type_msg)
+{
+	/* combine the message with the time type (like seconds) 
+	 * and then print it to stderr */
+	fprintf(stderr, "Failed to convert input to %s\n", time_type_msg);
+	exit(1);
+}
