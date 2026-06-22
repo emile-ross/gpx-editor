@@ -17,7 +17,16 @@ int time_parsing(int *flag_r_index, int num_args, char *argument[])
 
 			/* no need to convert since this is already in seconds */
 			duration += (int)strtol(argument[i], &endptr, 10);
-			valid_arg = true;
+			if (conversion_check(&endptr, argument[i], false) == 0)
+			{
+				valid_arg = true;
+			}
+			else
+			{
+				fprintf(stderr, "Failed to convert input to time\n");
+				exit(1);
+			}
+
 		}
 		else if (strcmp(argument[i], "-M") == 0)
 		{
@@ -46,38 +55,5 @@ int time_parsing(int *flag_r_index, int num_args, char *argument[])
 	}
 
 	return duration;
-}
-
-
-int conversion_check(const char *endptr, const char *input_string, const bool newline)
-{
-	if (!ignore_errors)
-	{
-		if (*endptr == '\0')
-		{
-			return 0;
-		}
-
-		if (strcmp(endptr, input_string) == 0)
-		{
-			fprintf(stderr, "No valid characters were found\n");
-			exit(-1);
-			return 1;
-		}
-
-		if (newline)
-		{
-			if (*endptr == '\n')
-			{
-				return 0;
-			}
-		}
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
-	return 0;
 }
 

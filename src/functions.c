@@ -38,3 +38,31 @@ void wait(long quarters, long seconds)
 
     	nanosleep(&install_timer, NULL);	/* execute nanosleep function and pass in the timespect struct */
 }
+
+int conversion_check(const char *endptr, const char *input_string, const bool newline)
+{
+	if (!ignore_errors)
+	{
+		if (*endptr == '\0')
+		{
+			return 0;
+		}
+
+		if (strcmp(endptr, input_string) == 0)
+		{
+			fprintf(stderr, "No valid characters were found\n");
+			exit(-1);
+			return 1;
+		}
+
+		if (newline)
+		{
+			if (*endptr == '\n')
+			{
+				return 0;
+			}
+		}
+		return 1;
+	}
+	return 0;
+}
