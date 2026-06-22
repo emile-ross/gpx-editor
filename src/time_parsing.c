@@ -53,10 +53,16 @@ int conversion_check(const char *endptr, const char *input_string, const bool ne
 {
 	if (!ignore_errors)
 	{
+		if (*endptr == '\0')
+		{
+			return 0;
+		}
+
 		if (strcmp(endptr, input_string) == 0)
 		{
 			fprintf(stderr, "No valid characters were found\n");
 			exit(-1);
+			return 1;
 		}
 
 		if (newline)
@@ -66,6 +72,11 @@ int conversion_check(const char *endptr, const char *input_string, const bool ne
 				return 0;
 			}
 		}
+		return 1;
+	}
+	else
+	{
+		return 0;
 	}
 	return 0;
 }
