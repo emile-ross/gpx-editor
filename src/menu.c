@@ -118,5 +118,12 @@ void display_time(struct maptime *date)
 char *timetotext(struct maptime *date)
 {
 	char *time_format = "%u-%u-%u %u:%u:%u";
+	uint16_t y = date->year;
+	uint16_t mo = date->month;
+	uint16_t d = date->day;
+	uint16_t h = date->hour;
+	uint16_t mi = date->minute;
+	uint16_t s = date->second;
 
+	size_t time_size = (size_t)snprintf(NULL, 0, time_format, y, mo, d, h, mi, s);
 }
