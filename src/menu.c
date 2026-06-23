@@ -8,7 +8,7 @@ struct maptime date_input(void)
 	
 	struct maptime *final_time = localtime(&default_time);
 
-	final_time->tm_sec = 0;	/* seconds are set to 0 by default */
+	final_time->second = 0;	/* seconds are set to 0 by default */
 
 	int choice = -1;
 
@@ -60,12 +60,12 @@ struct maptime date_input(void)
 		{
 			case 1:
 				date = get_time(1900, 2147483647, "year");
-				final_time->tm_year = date - 1900;
+				final_time->year = date - 1900;
 				break;
 
 			case 2:
 				date = get_time(1, 12, "months");
-				final_time->tm_mon = date - 1;
+				final_time->month = date - 1;
 				break;
 				
 			case 3:
@@ -118,12 +118,12 @@ void display_time(struct maptime *date)
 char *timetotext(struct maptime *date)
 {
 	char *time_format = "%u-%u-%u %u:%u:%u";
-	uint16_t y = date->year;
-	uint16_t mo = date->month;
-	uint16_t d = date->day;
-	uint16_t h = date->hour;
-	uint16_t mi = date->minute;
-	uint16_t s = date->second;
 
-	size_t time_size = (size_t)snprintf(NULL, 0, time_format, y, mo, d, h, mi, s);
+	size_t time_size = (size_t)snprintf(NULL, 0, time_format, 
+			date->year,
+			date->month, 
+			date->day,
+			date->hour,
+			date->minute,
+			date->second);
 }
