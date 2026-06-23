@@ -1,15 +1,26 @@
 #define _POSIX_C_SOURCE 199309L
 
+#include <limits.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <limits.h>
 #include <string.h>
 #include <time.h>
 
 #include "enums.h"
 
 #define max_time_len 32
+
+typedef struct
+{
+	uint16_t year;
+	uint8_t month;
+	uint8_t day;
+	uint8_t hour;
+	uint8_t minute;
+	uint8_t second;
+} maptime;
 
 /* global variables */
 	extern const char *program_name;
