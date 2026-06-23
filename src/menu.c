@@ -4,10 +4,9 @@ struct maptime* date_input(void)
 {
 	bool first_input = true;
 
-	/* time_t default_time = time(NULL);
-	 * struct maptime *final_time = localtime(&default_time); */
+	struct maptime final_time = current_time();
 
-	final_time->second = 0;	/* seconds are set to 0 by default */
+	final_time.second = 0;	/* seconds are set to 0 by default */
 
 	int choice = -1;
 	bool valid_choice = false;
@@ -21,10 +20,12 @@ struct maptime* date_input(void)
 			printf("The time is set to the current time by default\n");
 		}
 
-		char *time_string = malloc((size_t)max_time_len);
-		strftime(time_string, (size_t)max_time_len, "%Y-%m-%d %H:%M:%S", final_time);
+		size_t time_string_size = timetotext(NULL, &final_time);
+		char *time_string = malloc((size_t)time_string_size);
+		timetotext(time_string, &final_time);
 		
 		printf("Date: %s\n", time_string);
+		free(time_string);
 
 		printf("Edit Year:    1\n");
 		printf("Edit Months:  2\n");
@@ -57,33 +58,33 @@ struct maptime* date_input(void)
 		switch (choice)
 		{
 			case 1:
-				date = get_time(1900, 65535, "year");
-				final_time->year;
+				date = get_time(0, 65535, "year");
+				final_time.year = date;
 				break;
 
 			case 2:
 				date = get_time(1, 12, "months");
-				final_time->month = date - 1;
+				final_time.month = date - 1;
 				break;
 				
 			case 3:
 				date = get_time(1, 31, "days");
-				final_time->day = date;
+				final_time.day = date;
 				break;
 
 			case 4:
 				date = get_time(0, 23, "hours");
-				final_time->hour = date;
+				final_time.hour = date;
 				break;
 
 			case 5:
 				date = get_time(0, 59, "minutes");
-				final_time->minute = date;
+				final_time.minute = date;
 				break;
 
 			case 6:
 				date = get_time(0, 59, "seconds");
-				final_time->second = date;
+				final_time.second = date;
 				break;
 
 			default:
@@ -97,23 +98,10 @@ struct maptime* date_input(void)
 			first_input = false;
 		}
 	}
-	return *final_time;
+	return &final_time;
 }
 
-void display_time(struct maptime *date)
-{
-	/* max_time_len is defined in the header file
-	 * it is an arbitrary number of bytes since the strftime 
-	 * function doesn't allow buffer size calculation 
-	 * (like snprintf does) */ 
-	char *time_message = malloc((size_t)max_time_len);
-	strftime(time_message, (size_t)max_time_len, "%Y-%m-%d %H:%M:%S", date);
-	
-	printf("%s\n", time_message);
-	free(time_message);
-}
-
-size_t *timetotext(char *target, struct maptime *date)
+size_t timetotext(char *target, struct maptime *date)
 {
 	char *time_format = "%u-%u-%u %u:%u:%u";
 
@@ -135,4 +123,5 @@ size_t *timetotext(char *target, struct maptime *date)
 			date->minute,
 			date->second);
 	}
+	return time_size;
 }
