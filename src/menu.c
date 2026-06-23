@@ -1,12 +1,12 @@
 #include "header.h"
 
-struct tm date_input(void)
+struct maptime date_input(void)
 {
 	bool first_input = true;
 
 	time_t default_time = time(NULL);
 	
-	struct tm *final_time = localtime(&default_time);
+	struct maptime *final_time = localtime(&default_time);
 
 	final_time->tm_sec = 0;	/* seconds are set to 0 by default */
 
@@ -102,7 +102,7 @@ struct tm date_input(void)
 	return *final_time;
 }
 
-void display_time(struct tm *date)
+void display_time(struct maptime *date)
 {
 	/* max_time_len is defined in the header file
 	 * it is an arbitrary number of bytes since the strftime 
@@ -113,4 +113,10 @@ void display_time(struct tm *date)
 	
 	printf("%s\n", time_message);
 	free(time_message);
+}
+
+char *timetotext(struct maptime *date)
+{
+	char *time_format = "%u-%u-%u %u:%u:%u";
+
 }
