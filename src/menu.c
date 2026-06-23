@@ -4,14 +4,12 @@ struct maptime* date_input(void)
 {
 	bool first_input = true;
 
-	time_t default_time = time(NULL);
-	
-	struct maptime *final_time = localtime(&default_time);
+	/* time_t default_time = time(NULL);
+	 * struct maptime *final_time = localtime(&default_time); */
 
 	final_time->second = 0;	/* seconds are set to 0 by default */
 
 	int choice = -1;
-
 	bool valid_choice = false;
 
 	while (choice != 0)
