@@ -1,6 +1,6 @@
 #include "header.h"
 
-struct maptime date_input(void)
+struct maptime* date_input(void)
 {
 	bool first_input = true;
 
@@ -70,22 +70,22 @@ struct maptime date_input(void)
 				
 			case 3:
 				date = get_time(1, 31, "days");
-				final_time->tm_mday = date;
+				final_time->day = date;
 				break;
 
 			case 4:
 				date = get_time(0, 23, "hours");
-				final_time->tm_hour = date;
+				final_time->hour = date;
 				break;
 
 			case 5:
 				date = get_time(0, 59, "minutes");
-				final_time->tm_min = date;
+				final_time->mi = date;
 				break;
 
 			case 6:
 				date = get_time(0, 59, "seconds");
-				final_time->tm_sec = date;
+				final_time->second = date;
 				break;
 
 			default:

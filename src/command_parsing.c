@@ -29,7 +29,7 @@ int command_parsing(int num_args, char *arguments[])
 		}
 		else if (strcmp(arguments[i], "--start-time") == 0 || strcmp(arguments[i], "-s") == 0)
 		{
-			struct tm date = date_input();
+			struct maptime date = date_input();
 			display_time(&date);	/* pass in the date struct to the display_time function */
 
 			if (verbose)
@@ -39,7 +39,7 @@ int command_parsing(int num_args, char *arguments[])
 		}
 		else if (strcmp(arguments[i], "--end-time") == 0 || strcmp(arguments[i], "-e") == 0)
 		{
-			struct tm date = date_input();
+			struct maptime date = date_input();
 			display_time(&date);	/* pass in the date struct to the display_time function */
 
 			if (verbose)

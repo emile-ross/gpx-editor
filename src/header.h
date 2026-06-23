@@ -12,7 +12,7 @@
 
 #define max_time_len 32
 
-typedef struct
+typedef struct maptime
 {
 	uint16_t year;
 	uint8_t month;
@@ -20,7 +20,7 @@ typedef struct
 	uint8_t hour;
 	uint8_t minute;
 	uint8_t second;
-} maptime;
+} MapTime;
 
 /* global variables */
 	extern const char *program_name;
@@ -35,7 +35,7 @@ int conversion_check(const char *endptr, const char *input_string, const bool ne
 
 void stotime(int total_seconds, int *hours, int *minutes, int *seconds);
 
-struct tm date_input(void);
+struct maptime* date_input(void);
 int get_time(int lower_bound, int upper_bound, char *date_type);
 
 void wait(long quarters, long seconds);	/* waits for a certain time */
