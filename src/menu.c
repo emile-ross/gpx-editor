@@ -57,8 +57,8 @@ struct maptime* date_input(void)
 		switch (choice)
 		{
 			case 1:
-				date = get_time(1900, 2147483647, "year");
-				final_time->year = date - 1900;
+				date = get_time(1900, 65535, "year");
+				final_time->year;
 				break;
 
 			case 2:
@@ -78,7 +78,7 @@ struct maptime* date_input(void)
 
 			case 5:
 				date = get_time(0, 59, "minutes");
-				final_time->mi = date;
+				final_time->minute = date;
 				break;
 
 			case 6:
