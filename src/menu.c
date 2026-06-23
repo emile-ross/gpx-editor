@@ -115,15 +115,26 @@ void display_time(struct maptime *date)
 	free(time_message);
 }
 
-char *timetotext(struct maptime *date)
+size_t *timetotext(char *target, struct maptime *date)
 {
 	char *time_format = "%u-%u-%u %u:%u:%u";
 
-	size_t time_size = (size_t)snprintf(NULL, 0, time_format, 
+	size_t time_size = 1 + (size_t)snprintf(NULL, 0, time_format, 
 			date->year,
 			date->month, 
 			date->day,
 			date->hour,
 			date->minute,
 			date->second);
+	if (*target != '\0')
+	{
+		char *str = malloc(time_size);
+		snprintf(str, time_size, time_format, 
+			date->year,
+			date->month, 
+			date->day,
+			date->hour,
+			date->minute,
+			date->second);
+	}
 }
