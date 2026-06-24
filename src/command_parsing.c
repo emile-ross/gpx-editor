@@ -2,7 +2,7 @@
 
 int command_parsing(int num_args, char *arguments[])
 {
-	unsigned long final_time = -1;
+	unsigned long final_time = 1;
 
 	for (int i = 0; i < num_args; i++)
 	{
@@ -12,7 +12,7 @@ int command_parsing(int num_args, char *arguments[])
 			{
 				printf("interval mode\n");
 			}
-			unsigned long interval_time = time_parsing(&i, num_args, arguments);
+			unsigned long interval_time = (unsigned long)time_parsing(&i, num_args, arguments);
 			final_time = interval_time;
 			printf("Interval time is: %lu\n", interval_time);
 		}

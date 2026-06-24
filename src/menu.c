@@ -112,7 +112,7 @@ size_t timetotext(char *target, struct maptime *date)
 			date->hour,
 			date->minute,
 			date->second);
-	if (*target != '\0')
+	if (target != NULL)
 	{
 		char *str = malloc(time_size);
 		snprintf(str, time_size, time_format, 
@@ -122,6 +122,8 @@ size_t timetotext(char *target, struct maptime *date)
 			date->hour,
 			date->minute,
 			date->second);
+		strcpy(target, str);
+		free(str);
 	}
 	return time_size;
 }

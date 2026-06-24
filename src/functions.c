@@ -3,14 +3,16 @@
 void stotime(unsigned long total_seconds, uint8_t *hours, uint8_t *minutes, uint8_t *seconds)
 {
 	unsigned long seconds_remainder = total_seconds % 60;
-	*seconds = seconds_remainder;
+	/* this cast is correct because we have a modulus operator
+	 * with 60, guaranteeing a value less than 60 */
+	*seconds = (uint8_t)seconds_remainder;	
 
 	unsigned long minutes_pre_remainder = total_seconds - seconds_remainder;
 	unsigned long minutes_remainder = minutes_pre_remainder % 3600;
-	*minutes = minutes_remainder / 60;
+	*minutes = (uint8_t)(minutes_remainder / 60);
 
 	unsigned long hours_temp = minutes_pre_remainder - minutes_remainder;
-	*hours = hours_temp / 3600;
+	*hours = (uint8_t)(hours_temp / 3600);
 }
 
 void clear(void)
