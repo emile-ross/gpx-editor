@@ -36,8 +36,8 @@ int conversion_check(const char *endptr, const char *input_string, const bool ne
 void stotime(int total_seconds, int *hours, int *minutes, int *seconds);
 
 struct maptime* date_input(void);
-int get_time(int lower_bound, int upper_bound, char *date_type);
+uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, bool eight_bit_conversion);
 
 void wait(long quarters, long seconds);	/* waits for a certain time */
 
-void display_time(struct tm *date);
+size_t timetotext(char *target, struct maptime *date);
