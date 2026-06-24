@@ -33,11 +33,12 @@ int command_parsing(int num_args, char *arguments[]);
 long time_parsing(int *flag_r_index, int num_args, char *argument[]);
 int conversion_check(const char *endptr, const char *input_string, const bool newline);
 
-void stotime(int total_seconds, int *hours, int *minutes, int *seconds);
+void stotime(unsigned long total_seconds, uint8_t *hours, uint8_t *minutes, uint8_t *seconds);
 
-struct maptime* date_input(void);
 uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, bool eight_bit_conversion);
 
 void wait(long quarters, long seconds);	/* waits for a certain time */
 
 size_t timetotext(char *target, struct maptime *date);
+struct maptime current_time(void);
+struct maptime date_input(void);
