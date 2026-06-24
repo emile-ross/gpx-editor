@@ -1,6 +1,6 @@
 #include "header.h"
 
-struct maptime* date_input(void)
+struct maptime date_input(void)
 {
 	bool first_input = true;
 
@@ -54,37 +54,37 @@ struct maptime* date_input(void)
 			valid_choice = true;
 		}
 
-		int date = -1;
+		uint16_t date = 0;
 		switch (choice)
 		{
 			case 1:
-				date = get_time(0, 65535, "year");
+				date = get_time(0, 65535, "year", false);
 				final_time.year = date;
 				break;
 
 			case 2:
-				date = get_time(1, 12, "months");
-				final_time.month = date - 1;
+				date = get_time(1, 12, "months", true);
+				final_time.month = (uint8_t)date;
 				break;
 				
 			case 3:
-				date = get_time(1, 31, "days");
-				final_time.day = date;
+				date = get_time(1, 31, "days", true);
+				final_time.day = (uint8_t)date;
 				break;
 
 			case 4:
-				date = get_time(0, 23, "hours");
-				final_time.hour = date;
+				date = get_time(0, 23, "hours", true);
+				final_time.hour = (uint8_t)date;
 				break;
 
 			case 5:
-				date = get_time(0, 59, "minutes");
-				final_time.minute = date;
+				date = get_time(0, 59, "minutes", true);
+				final_time.minute = (uint8_t)date;
 				break;
 
 			case 6:
-				date = get_time(0, 59, "seconds");
-				final_time.second = date;
+				date = get_time(0, 59, "seconds", true);
+				final_time.second = (uint8_t)date;
 				break;
 
 			default:
@@ -98,7 +98,7 @@ struct maptime* date_input(void)
 			first_input = false;
 		}
 	}
-	return &final_time;
+	return final_time;
 }
 
 size_t timetotext(char *target, struct maptime *date)
