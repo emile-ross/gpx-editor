@@ -30,7 +30,7 @@ typedef struct maptime
 void clear(void);
 void err(const char *error_message);
 int command_parsing(int num_args, char *arguments[]);
-int time_parsing(int *flag_r_index, int num_args, char *argument[]);
+long time_parsing(int *flag_r_index, int num_args, char *argument[]);
 int conversion_check(const char *endptr, const char *input_string, const bool newline);
 
 void stotime(int total_seconds, int *hours, int *minutes, int *seconds);

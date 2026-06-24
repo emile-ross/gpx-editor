@@ -2,7 +2,7 @@
 
 void parsing_fail(char *time_type_msg);
 
-int time_parsing(int *flag_r_index, int num_args, char *argument[])
+long time_parsing(int *flag_r_index, int num_args, char *argument[])
 {
 	int flag_r = *flag_r_index;
 
