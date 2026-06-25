@@ -16,56 +16,46 @@ void forwards_write(struct maptime *track_time, int num_waypoints, const unsigne
 
 	/* TODO account for division by zero */
 	const char *track_time_template = "<when>%u-%u-%uT%02u:%02u:%02uZ</when>";
+
+	char *current_entry = malloc(max_line_length);
+
 	for (int i = 0; i < num_waypoints; i++)
 	{
-		unsigned long interval = time_interval;
-
-		uint8_t seconds = track_time->second + interval % 60; 
-
-		if (seconds >= 60)
+		unsigned long remaining_time = time_interval;
+		
+		/* add seconds */
+		track_time->second += remaining_time % 60;
+		remaining_time -= remaining_time % 60;
+		
+		if (track_time->second >= 60)
 		{
-			track_time->minute++;
-			seconds -= 60;
+			track_time->minute += track_time->second / 60;
+			track_time->second %= 60;
 		}
-		interval -= interval % 60;
-
-		track_time->second = seconds;
-
-		int interval_remainder = interval % 3600;
-		uint8_t minutes = 0;
-
-		if (interval_remainder != 0)
+		
+		/* set minutes */
+		unsigned long mins_to_add = (remaining_time / 60) % 60;
+		track_time->minute += mins_to_add;
+		remaining_time -= mins_to_add * 60;
+		
+		if (track_time->minute >= 60)
 		{
-			minutes = (uint8_t)(track_time->minute + ((interval_remainder) / 60)); 
-
-			if (minutes >= 60 && minutes <= 120)
-			{
-				track_time->hour++;
-				minutes -= 60;
-			}
-			else if (minutes >= 120)
-			{
-				/* can't be ignored if even if there is no error checking */
-				err("Invalid number of minutes");
-			}
-
-			interval -= (uint8_t)(interval % (unsigned)((interval_remainder) / 60));
-
-			/* set the minute struct member as the minutes local variable */
-			track_time->minute = minutes;
+			track_time->hour += track_time->minute / 60;
+			track_time->minute %= 60;
 		}
-
-
-		uint8_t hours = (uint8_t)(track_time->hour + (interval / 3600));
-		if (hours >= 24)
+		
+		/* set hours */
+		unsigned long hours_to_add = (remaining_time / (60 * 60)) % 24;
+		track_time->hour += hours_to_add;
+		remaining_time -= hours_to_add * (60 * 60);
+		
+		if (track_time->hour >= 24)
 		{
-			hours -= 24;
-			track_time->day++;
+			track_time->day += track_time->hour / 24;
+			track_time->hour %= 24;
 		}
-
-		track_time->hour = hours;
-
-		char *current_entry = malloc(max_line_length);
+		
+		/* write to current_entry buffer */
 		snprintf(current_entry, max_line_length, track_time_template, 
 				track_time->year,
 				track_time->month,
@@ -74,6 +64,6 @@ void forwards_write(struct maptime *track_time, int num_waypoints, const unsigne
 				track_time->minute,
 				track_time->second);
 		printf("%s\n", current_entry);
-		free(current_entry);
 	}
+	free(current_entry);
 }
