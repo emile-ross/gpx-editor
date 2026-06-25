@@ -1,5 +1,7 @@
 #include "header.h"
 
+const bool error_checking = true;
+
 void forwards_write(struct maptime *track_time, int num_waypoints, const unsigned long time_interval)
 {
 	track_time->year;
@@ -8,7 +10,7 @@ void forwards_write(struct maptime *track_time, int num_waypoints, const unsigne
 	track_time->hour;
 	track_time->second;
 
-	for (int i = 0; i < num_waypoints; i++);
+	for (int i = 0; i < num_waypoints; i++)
 	{
 		unsigned long interval = time_interval;
 
@@ -22,6 +24,23 @@ void forwards_write(struct maptime *track_time, int num_waypoints, const unsigne
 		interval -= interval % 60;
 
 		track_time->second = seconds;
+
+		uint8_t minutes = track_time->minute + ((interval % 3600)/60); 
+
+		if (minutes >= 60 && minutes <= 120)
+		{
+			track_time->hour++;
+			minutes -= 60;
+		}
+		else if (minutes >= 120)
+		{
+			/* can't be ignored if even if there is no error checking */
+			err("Invalid number of minutes");
+		}
+
+		interval -= interval % ((interval % 3600)/60);
+
+		track_time->minute = minutes;
 	}
 	const char *track_time_template = "<when>%u-%u-%uT%u:%u:%uZ</when>";
 }
