@@ -42,3 +42,5 @@ void wait(long quarters, long seconds);	/* waits for a certain time */
 size_t timetotext(char *target, struct maptime *date);
 struct maptime current_time(void);
 struct maptime date_input(void);
+
+void forwards_write(struct maptime *track_time, int num_waypoints, const unsigned long time_interval);
