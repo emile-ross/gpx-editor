@@ -4,7 +4,12 @@ void parsing_fail(char *time_type_msg);
 
 long time_parsing(int *flag_r_index, int num_args, char *argument[])
 {
-	int flag_r = *flag_r_index;
+	if (*flag_r_index > 255 || *flag_r_index < 0)
+	{
+		err("Invalid number of arguments");
+	}
+
+	uint8_t flag_r = (uint8_t)*flag_r_index;
 
 	long duration = 0;
 
@@ -67,5 +72,6 @@ void parsing_fail(char *time_type_msg)
 	 * and then print it to stderr */
 	fprintf(stderr, "Failed to convert input text to %s\n", time_type_msg);
 	fprintf(stderr, "Only numbers are allowed\n");
+
 	exit(1);
 }

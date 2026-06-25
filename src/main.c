@@ -31,7 +31,7 @@ void err(const char *error_message)
 	/* write to message buffer using snprintf */
 	snprintf(message, message_len, message_template, program_name, error_message);
 
-	printf("\x1b[31m%s\x1B[0m\n", message);
+	fprintf(stderr, "\x1b[31m%s\x1B[0m\n", message);
 
 	exit(1);
 }
