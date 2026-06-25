@@ -47,57 +47,61 @@ struct maptime date_input(void)
 		}
 
 		choice_temp = strtol(buffer, &endptr, 10);
-
-		if (!(choice_temp > 6 || choice_temp < 0))
+		if (*endptr == '\n' && endptr != buffer)
 		{
-			choice = (int)choice_temp;
-			valid_choice = true;
-		}
+			if (!(choice_temp > 6 || choice_temp < 0))
+			{
+				choice = (int)choice_temp;
+				valid_choice = true;
+			}
 
-		uint16_t date = 0;
-		switch (choice)
-		{
-			case 1:
-				date = get_time(0, 65535, "year", false);
-				final_time.year = date;
-				break;
+			uint16_t date = 0;
+			switch (choice)
+			{
+				case 1:
+					date = get_time(0, 65535, "year", false);
+					final_time.year = date;
+					break;
 
-			case 2:
-				date = get_time(1, 12, "months", true);
-				final_time.month = (uint8_t)date;
-				break;
-				
-			case 3:
-				date = get_time(1, 31, "days", true);
-				final_time.day = (uint8_t)date;
-				break;
+				case 2:
+					date = get_time(1, 12, "months", true);
+					final_time.month = (uint8_t)date;
+					break;
+					
+				case 3:
+					date = get_time(1, 31, "days", true);
+					final_time.day = (uint8_t)date;
+					break;
 
-			case 4:
-				date = get_time(0, 23, "hours", true);
-				final_time.hour = (uint8_t)date;
-				break;
+				case 4:
+					date = get_time(0, 23, "hours", true);
+					final_time.hour = (uint8_t)date;
+					break;
 
-			case 5:
-				date = get_time(0, 59, "minutes", true);
-				final_time.minute = (uint8_t)date;
-				break;
+				case 5:
+					date = get_time(0, 59, "minutes", true);
+					final_time.minute = (uint8_t)date;
+					break;
 
-			case 6:
-				date = get_time(0, 59, "seconds", true);
-				final_time.second = (uint8_t)date;
-				break;
+				case 6:
+					date = get_time(0, 59, "seconds", true);
+					final_time.second = (uint8_t)date;
+					break;
 
-			default:
-				valid_choice = false;
-				break;
-		}
-		printf("%d\n", date);
+				default:
+					valid_choice = false;
+					break;
+			}
+			printf("%d\n", date);
 
-		if (valid_choice)
-		{
-			first_input = false;
+			if (valid_choice)
+			{
+				first_input = false;
+			}
 		}
 	}
+
+	forwards_write(&final_time, 8, 9);
 	return final_time;
 }
 
