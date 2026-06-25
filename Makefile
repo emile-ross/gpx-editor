@@ -2,7 +2,7 @@ FLAGS = -Wconversion -Wall -Wextra -std=c99 -Wpedantic -Wshadow -Wswitch-enum -W
 Z = zig cc
 
 SOURCE_DIR := src
-SRC_FILES := current_time.c config.c menu.c input.c functions.c main.c command_parsing.c time_parsing.c
+SRC_FILES := write.c current_time.c config.c menu.c input.c functions.c main.c command_parsing.c time_parsing.c
 FILES := $(addprefix $(SOURCE_DIR)/, $(SRC_FILES))
 
 cmd = $(FILES) -o medit 
@@ -16,4 +16,4 @@ install: base
 	sudo cp -f medit /usr/bin/
 
 gcc:
-	gcc $(cmd)
+	gcc $(cmd) -Wall -Wextra -Wpedantic -std=c99 -Wconversion
