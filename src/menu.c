@@ -103,7 +103,7 @@ struct maptime date_input(void)
 
 size_t timetotext(char *target, struct maptime *date)
 {
-	char *time_format = "%u-%u-%u %u:%u:%u";
+	char *time_format = "%u-%u-%u %u:%02u:%02u";
 
 	size_t time_size = 1 + (size_t)snprintf(NULL, 0, time_format, 
 			date->year,

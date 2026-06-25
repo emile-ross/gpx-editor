@@ -15,7 +15,7 @@ void forwards_write(struct maptime *track_time, int num_waypoints, const unsigne
 	*/
 
 	/* TODO account for division by zero */
-	const char *track_time_template = "<when>%u-%u-%uT%u:%u:%uZ</when>";
+	const char *track_time_template = "<when>%u-%u-%uT%02u:%02u:%02uZ</when>";
 	for (int i = 0; i < num_waypoints; i++)
 	{
 		unsigned long interval = time_interval;
@@ -31,23 +31,30 @@ void forwards_write(struct maptime *track_time, int num_waypoints, const unsigne
 
 		track_time->second = seconds;
 
-		uint8_t minutes = track_time->minute + ((interval % 3600)/60); 
+		int interval_remainder = interval % 3600;
+		uint8_t minutes = 0;
 
-		if (minutes >= 60 && minutes <= 120)
+		if (interval_remainder != 0)
 		{
-			track_time->hour++;
-			minutes -= 60;
-		}
-		else if (minutes >= 120)
-		{
-			/* can't be ignored if even if there is no error checking */
-			err("Invalid number of minutes");
+			minutes = (uint8_t)(track_time->minute + ((interval_remainder) / 60)); 
+
+			if (minutes >= 60 && minutes <= 120)
+			{
+				track_time->hour++;
+				minutes -= 60;
+			}
+			else if (minutes >= 120)
+			{
+				/* can't be ignored if even if there is no error checking */
+				err("Invalid number of minutes");
+			}
+
+			interval -= (uint8_t)(interval % (unsigned)((interval_remainder) / 60));
+
+			/* set the minute struct member as the minutes local variable */
+			track_time->minute = minutes;
 		}
 
-		interval -= (interval % ((interval % 3600)/60));
-
-		/* set the minute struct member as the minutes local variable */
-		track_time->minute = minutes;
 
 		uint8_t hours = (uint8_t)(track_time->hour + (interval / 3600));
 		if (hours >= 24)
@@ -64,6 +71,7 @@ void forwards_write(struct maptime *track_time, int num_waypoints, const unsigne
 				track_time->month,
 				track_time->day,
 				track_time->hour,
+				track_time->minute,
 				track_time->second);
 		printf("%s\n", current_entry);
 		free(current_entry);
