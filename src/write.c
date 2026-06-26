@@ -3,7 +3,7 @@
 const bool error_checking = true;
 const size_t max_line_length = 128;
 
-void forwards_write(struct maptime *track_time, int num_waypoints, const unsigned long time_interval)
+void forwards_write(struct maptime *track_time, uint32_t num_waypoints, const unsigned long time_interval)
 {
 	/*
 	 * members of the struct:
@@ -14,10 +14,9 @@ void forwards_write(struct maptime *track_time, int num_waypoints, const unsigne
 	track_time->second;
 	*/
 
-	/* TODO account for division by zero */
 	const char *track_time_template = "<when>%u-%u-%uT%02u:%02u:%02uZ</when>";
 
-	char *current_entry = malloc(max_line_length);
+	char (*time_table)[num_waypoints] = malloc(max_line_length*num_waypoints);
 
 	for (int i = 0; i < num_waypoints; i++)
 	{
@@ -63,7 +62,6 @@ void forwards_write(struct maptime *track_time, int num_waypoints, const unsigne
 				track_time->hour,
 				track_time->minute,
 				track_time->second);
-		printf("%s\n", current_entry);
+		strncpy(time_table[i], current_entry, max_line_length);
 	}
-	free(current_entry);
 }
