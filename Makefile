@@ -10,7 +10,7 @@ cmd = $(FILES) -o medit
 zig: 
 	$(Z) $(cmd) $(FLAGS)
 base: 
-	$(Z) $(cmd) $(FLAGS) -Werror
+	$(Z) $(cmd) $(FLAGS) -Werror -g
 
 install: base
 	sudo cp -f medit /usr/bin/

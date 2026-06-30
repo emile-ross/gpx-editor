@@ -63,5 +63,8 @@ int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uin
 				track_time->minute,
 				track_time->second);
 	}
+
+	free(time_table);
+
 	return 0;
 }
