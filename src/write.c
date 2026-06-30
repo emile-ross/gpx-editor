@@ -3,7 +3,7 @@
 const bool error_checking = true;
 const size_t max_line_length = 128;
 
-int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const unsigned long time_interval)
+int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uint32_t time_interval)
 {
 	/*
 	 * members of the struct:
@@ -63,5 +63,5 @@ int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uns
 				track_time->minute,
 				track_time->second);
 	}
-  return 0;
+	return 0;
 }

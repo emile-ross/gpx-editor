@@ -43,4 +43,4 @@ size_t timetotext(char *target, struct maptime *date);
 struct maptime current_time(void);
 struct maptime date_input(void);
 
-void forwards_write(struct maptime *track_time, int num_waypoints, const unsigned long time_interval);
+int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uint32_t time_interval);
