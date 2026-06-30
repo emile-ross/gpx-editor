@@ -61,7 +61,6 @@ long time_parsing(int *flag_r_index, int num_args, char *argument[])
 			}
 		}
 	}
-
 	return duration;
 }
 

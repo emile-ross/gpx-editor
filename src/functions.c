@@ -23,14 +23,15 @@ void clear(void)
 
 void wait(long quarters, long seconds)
 {
-	if (quarters > 0 && quarters < 4)	/* 4 quarters per second */
+	if ((quarters > 0) && (quarters < 4))	/* 4 quarters per second */
 	{
 		quarters *= 250000000;	/* convert quarters to nanoseconds */
 	}
 	else
 	{
+		/* adds the number of seconds corresponding to the number of quarters divided by 4 */
+		seconds += (long)(quarters / 4);
 		quarters = 0;
-		seconds += 1;	/* adds 1 second if 4 >= quarters */
 	}
 
 	struct timespec install_timer;
@@ -49,15 +50,21 @@ int conversion_check(const char *endptr, const char *input_string, const bool ne
 	{
 		/* exits if valid */
 		if (*endptr == '\0')
+		{
 			return 0;
+		}
 
 		if (strcmp(endptr, input_string) == 0)
+		{
 			return 1;
+		}
 
 		if (newline)
 		{
 			if (*endptr == '\n')
+			{
 				return 0;
+			}
 		}
 		return 1;
 	}
