@@ -14,7 +14,7 @@ uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, b
 		integer_max = 65535;
 	}
 
-	int i = 0;
+	uint8_t i = 0;
 	while (1)
 	{
 		clear();
@@ -37,9 +37,13 @@ uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, b
 
 		date_input = strtol(input_buffer, &endptr, 10);
 
-        	if (*endptr != '\n' && *endptr != '\0')
+		if (strcmp(endptr, input_buffer) == 0)
 		{
 			err("No valid characters found");
+		}
+        	if (*endptr != '\n' && *endptr != '\0')
+		{
+			err("Invalid input termination");
 		}
 		else if (date_input < lower_bound ||  date_input > upper_bound)
 		{

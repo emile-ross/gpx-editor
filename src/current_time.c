@@ -4,7 +4,7 @@ bool in_bounds(int input)
 {
 	if (input > 65535 || input < 0)
 	{
-		err("Out of bounds input\n");
+		err("Out of bounds input");
 		return false;
 	}
 	return true;
