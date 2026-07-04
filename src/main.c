@@ -21,7 +21,7 @@ void err(const char *error_message)
 		exit(1);
 	}
 
-	char *message_template = "%s: %s"; /* program_name then the message */
+	const char *message_template = "%s: %s"; /* program_name then the message */
 
 	/* calculate message length */
 	size_t message_len = 1 + (size_t)snprintf(NULL, 0, message_template, program_name, error_message);

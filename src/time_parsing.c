@@ -57,7 +57,7 @@ long time_parsing(int *flag_r_index, int num_args, char *argument[])
 		{
 			if (*endptr != '\0')
 			{
-				printf("error converting \"%s\" to a number\n", endptr);
+				fprintf(stderr, "error converting \"%s\" to a number\n", endptr);
 			}
 		}
 	}
