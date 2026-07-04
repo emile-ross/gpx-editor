@@ -32,6 +32,7 @@ void err(const char *error_message)
 	snprintf(message, message_len, message_template, program_name, error_message);
 
 	fprintf(stderr, "\x1b[31m%s\x1B[0m\n", message);
+	free(message);
 
 	exit(1);
 }
