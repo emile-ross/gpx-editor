@@ -30,6 +30,7 @@ struct maptime current_time(void)
 	current_time_m.hour = (uint8_t)cur_time->tm_hour;
 	current_time_m.minute = (uint8_t)cur_time->tm_min;
 	current_time_m.second = (uint8_t)cur_time->tm_sec;
+
 	return current_time_m;
 }
 

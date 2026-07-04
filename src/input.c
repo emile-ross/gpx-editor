@@ -3,8 +3,6 @@
 uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, bool eight_bit_conversion)
 {
 	long date_input;
-	int i = 0;
-
 
 	uint16_t integer_max;
 	if (eight_bit_conversion)
@@ -16,6 +14,7 @@ uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, b
 		integer_max = 65535;
 	}
 
+	int i = 0;
 	while (1)
 	{
 		clear();
@@ -33,22 +32,22 @@ uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, b
 
 		if (fgets(input_buffer, sizeof(input_buffer), stdin) == NULL)
 		{
-			fprintf(stderr, "Failed to parse input.\n");
+			err("Failed to parse input.");
 		}
 
 		date_input = strtol(input_buffer, &endptr, 10);
 
         	if (*endptr != '\n' && *endptr != '\0')
 		{
-			fprintf(stderr, "No valid characters found\n");
+			err("No valid characters found");
 		}
 		else if (date_input < lower_bound ||  date_input > upper_bound)
 		{
-			fprintf(stderr, "Invalid date input\n");
+			err("Invalid date input.");
 		}
 		else if (date_input < 0 || date_input > integer_max)
 		{
-			fprintf(stderr, "Invalid date input\n");
+			err("Invalid date input.");
 		}
 		else
 		{
