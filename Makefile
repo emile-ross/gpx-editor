@@ -2,7 +2,10 @@ FLAGS = -Wconversion -Wall -Wextra -std=c99 -Wpedantic -Wshadow -Wswitch-enum -W
 Z = zig cc
 
 SOURCE_DIR := src
-SRC_FILES := write.c output.c current_time.c config.c menu.c input.c functions.c main.c command_parsing.c time_parsing.c
+filenames := write output current_time config menu input functions main command_parsing time_parsing
+
+SRC_FILES := $(addsuffix .c, $(filenames))
+
 FILES := $(addprefix $(SOURCE_DIR)/, $(SRC_FILES))
 
 cmd = $(FILES) -o medit 
