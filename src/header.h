@@ -20,6 +20,13 @@ typedef struct maptime
 	uint8_t second;
 } MapTime;
 
+typedef struct
+{
+	bool interval_specified;
+	bool start_time_specified;
+	bool end_time_specified;
+}  output_arguments_bl;
+
 /* global variables */
 	extern const char *program_name;
 	extern const bool verbose;
