@@ -37,9 +37,17 @@ void err(const char *restrict format, ...)
 	va_end(args);
 
 	if (ret > msg_size)
+	const char *message_template = "%s: %s";	/* program_name then the message */
+
+	size_t final_msg_size = 1 + (size_t)snprintf(NULL, 0, message_template, program_name, base_error_msg);
+	char *error_msg = malloc(final_msg_size);
+	if (error_msg == NULL)
 	{
 		err("malloc() failed to allocate memory");
 	}
+	/* write to buffer & compare return value with msg size calculated previously */
+	ret = (size_t)snprintf(error_msg, final_msg_size, message_template, program_name, base_error_msg);
+	free(base_error_msg);
 
 
 	/* calculate message length */
