@@ -9,6 +9,9 @@ int command_parsing(int num_args, char *arguments[])
 
 	for (int i = 0; i < num_args; i++)
 	{
+		bool useless_flag = false;
+
+		const int initial_index = i;
 		if (strcmp(arguments[i], "-i") == 0)
 		{
 			if (verbose)
@@ -20,7 +23,7 @@ int command_parsing(int num_args, char *arguments[])
 		}
 		else if (strcmp(arguments[i], "-t") == 0)
 		{
-			warn("The -t flag is not in use");
+			useless_flag = true;
 			if (verbose)
 			{
 				printf("total time mode\n");
@@ -48,6 +51,8 @@ int command_parsing(int num_args, char *arguments[])
 		}
 		else if (strcmp(arguments[i], "--end-time") == 0 || strcmp(arguments[i], "-e") == 0)
 		{
+			useless_flag = true;
+
 			/* get user input on the chosen time and store it in maptime date struct */
 			date = date_input();
 			size_t time_msg_size = timetotext(NULL, &date);	/* calculate buffer size */
@@ -78,6 +83,11 @@ int command_parsing(int num_args, char *arguments[])
 			num_waypoints = (uint32_t)temp_points;
 		}
 
+		if (useless_flag)
+		{
+			/* display warning message */
+			warn("The %s flag will not be used by the program", arguments[initial_index]);
+		}
 	}
 
 	uint8_t num_seconds, num_minutes, num_hours;

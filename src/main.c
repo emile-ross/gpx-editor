@@ -40,13 +40,20 @@ void err(const char *error_message)
 
 void warn(const char *restrict format, ...)
 {
-	va_list args;	/* use the ... */
+	va_list args, copy;
 	va_start(args, format);
-	size_t msg_size = 1 + (size_t)vsnprintf(NULL, 0, format, args);
-	va_end(args);
+	va_copy(copy, args);
+
+	size_t msg_size = 1 + (size_t)vsnprintf(NULL, 0, format, copy);
+	va_end(copy);
 
 	char *warning_msg = malloc(msg_size);
+	if (warning_msg == NULL)
+	{
+		err("malloc() failed to allocate memory");
+	}
 	size_t ret = (size_t)vsnprintf(warning_msg, msg_size, format, args);
+	va_end(args);
 	if (ret > msg_size)
 	{
 		err("Warning message write failed");
