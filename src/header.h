@@ -36,7 +36,7 @@ typedef struct
 	extern const bool verbose;
 	extern const bool ignore_errors;
 
-void err(const char *error_message);
+void err(const char *restrict format, ...);
 void warn(const char *restrict format, ...);
 
 void clear(void);
