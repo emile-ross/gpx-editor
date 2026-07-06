@@ -44,7 +44,7 @@ int command_parsing(int num_args, char *arguments[]);
 
 uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[]);
 uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, bool eight_bit_conversion);
-void bound_check(int64_t val, uint64_t lb, uint64_t ub);
+void bound_check(int64_t val, int64_t lb, int64_t ub);
 
 void stotime(unsigned long total_seconds, uint8_t *hours, uint8_t *minutes, uint8_t *seconds);
 
