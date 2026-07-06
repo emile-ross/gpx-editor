@@ -72,16 +72,18 @@ bool conversion_check(const char *endptr, const char *input_string, const bool n
 	return true;
 }
 
-void bound_check(int64_t val, int64_t lb, int64_t ub)
+bool bound_check(int64_t val, int64_t lb, int64_t ub)
 {
 	if (val > ub)
 	{
 		err("Input out of bounds");
+		return false;
 	}
 	else if (val < lb)
 	{
 		err("Input out of bounds");
-
+		return false;
 	}
+	return true;
 }
 
