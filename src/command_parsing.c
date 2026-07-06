@@ -62,6 +62,21 @@ int command_parsing(int num_args, char *arguments[])
 				printf("end time\n");
 			}
 		}
+		else if (strcmp(arguments[i], "-p") == 0 || strcmp(arguments[i], "--points") == 0 || 
+				strcmp(arguments[i], "-w") == 0 || strcmp(arguments[i], "--waypoints") == 0)
+		{
+			char *endptr = NULL;
+			int index = i + 1;
+			long temp_points = strtol(arguments[index], &endptr, 10);
+			if (*endptr != '\0')
+			{
+				err("Failed to convert points to integer");
+			}
+
+			bound_check(temp_points, 0, UINT32MAX);
+			num_waypoints = (uint32_t)temp_points;
+		}
+
 	}
 
 	uint8_t num_seconds, num_minutes, num_hours;
