@@ -69,7 +69,6 @@ struct maptime date_input(void)
 		}
 	}
 
-	forwards_write(&final_time, 8, 9);
 	return final_time;
 }
 

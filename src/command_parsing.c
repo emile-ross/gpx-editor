@@ -3,6 +3,8 @@
 int command_parsing(int num_args, char *arguments[])
 {
 	unsigned long final_time = 1;
+	unsigned long interval_time = 0;
+	struct maptime date = current_time();
 
 	for (int i = 0; i < num_args; i++)
 	{
@@ -12,7 +14,7 @@ int command_parsing(int num_args, char *arguments[])
 			{
 				printf("interval mode\n");
 			}
-			unsigned long interval_time = (unsigned long)time_parsing(&i, num_args, arguments);
+			interval_time = (unsigned long)time_parsing(&i, num_args, arguments);
 			final_time = interval_time;
 			printf("Interval time is: %lu\n", interval_time);
 		}
@@ -30,7 +32,7 @@ int command_parsing(int num_args, char *arguments[])
 		else if (strcmp(arguments[i], "--start-time") == 0 || strcmp(arguments[i], "-s") == 0)
 		{
 			/* get user input on the chosen time and store it in maptime date struct */
-			struct maptime date = date_input();
+			date = date_input();
 			size_t time_msg_size = timetotext(NULL, &date);	/* calculate buffer size */
 
 			char *time_msg = malloc(time_msg_size);
@@ -47,7 +49,7 @@ int command_parsing(int num_args, char *arguments[])
 		else if (strcmp(arguments[i], "--end-time") == 0 || strcmp(arguments[i], "-e") == 0)
 		{
 			/* get user input on the chosen time and store it in maptime date struct */
-			struct maptime date = date_input();
+			date = date_input();
 			size_t time_msg_size = timetotext(NULL, &date);	/* calculate buffer size */
 
 			char *time_msg = malloc(time_msg_size);
@@ -67,6 +69,8 @@ int command_parsing(int num_args, char *arguments[])
 	stotime(final_time, &num_hours, &num_minutes, &num_seconds);
 
 	printf("seconds: %d\nminutes: %d\nhours: %d\n", num_seconds, num_minutes, num_hours);
+
+	forwards_write(&date, 8, interval_time);
 
 	return 0;
 }
