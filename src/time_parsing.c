@@ -10,8 +10,8 @@ uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[])
 	}
 
 	uint8_t flag_r = (uint8_t)*flag_r_index;
-
-	long duration = 0;
+	uint32_t duration = 0;
+	uint8_t num_valid_args = 0;
 
 	for (int i = flag_r; i < num_args; i++)
 	{
@@ -23,34 +23,50 @@ uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[])
 			i++; /* read ahead */
 
 			/* no need to convert since this is already in seconds */
-			duration += strtol(argument[i], &endptr, 10);
+			long seconds = strtol(argument[i], &endptr, 10);
 			if (conversion_check(endptr, argument[i], false))
 				valid_arg = true;
 			else
 				parsing_fail("seconds");
 
+			
+			if (bound_check(seconds, 0, 59))
+			{
+				num_valid_args++;
+				duration += (uint32_t)seconds;
+			}
 		}
 		else if (strcmp(argument[i], "-M") == 0)
 		{
 			i++; /* read ahead */
 			/* convert minutes to seconds */
-			uint8_t minutes = (uint8_t)strtol(argument[i], &endptr, 10);
-			duration += (long)(minutes * 60);
+			long minutes = strtol(argument[i], &endptr, 10);
 			if (conversion_check(endptr, argument[i], false))
 				valid_arg = true;
 			else
 				parsing_fail("minutes");
+
+			if (bound_check(minutes, 0, 59))
+			{
+				num_valid_args++;
+				duration += (uint32_t)(60 * minutes);
+			}
 		}
 		else if (strcmp(argument[i], "-H") == 0)
 		{
 			i++; /* read ahead */
 			/* convert hours to seconds */
-			uint8_t hours = (uint8_t)strtol(argument[i], &endptr, 10);
-			duration += (long)(hours * 3600);
+			long hours = strtol(argument[i], &endptr, 10);
 			if (conversion_check(endptr, argument[i], false))
 				valid_arg = true;
 			else
 				parsing_fail("hours");
+
+			if (bound_check((3600 * hours), 0, UINT32MAX))
+			{
+				num_valid_args++;
+				duration += (uint32_t)(3600 * hours);
+			}
 		}
 
 		if (valid_arg)
@@ -60,6 +76,11 @@ uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[])
 				fprintf(stderr, "error converting \"%s\" to a number\n", endptr);
 			}
 		}
+	}
+
+	if (num_valid_args <= 0)
+	{
+		warn("No values were provided,\nTime set to 0 (default)");
 	}
 
 	bound_check(duration, 0, UINT32MAX);
