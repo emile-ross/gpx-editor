@@ -37,7 +37,7 @@ typedef struct
 	extern const bool ignore_errors;
 
 void err(const char *error_message);
-void warn(char *message);
+void warn(const char *restrict format, ...);
 
 void clear(void);
 bool conversion_check(const char *endptr, const char *input_string, const bool newline);

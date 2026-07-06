@@ -1,4 +1,5 @@
 #include "header.h"
+#include <stdarg.h>
 
 const char *program_name = "medit";
 
@@ -37,10 +38,24 @@ void err(const char *error_message)
 	exit(1);
 }
 
-void warn(char *message)
+void warn(const char *restrict format, ...)
 {
-	printf("\x1B[1m\x1b[31m%s\x1B[0m\n", message);
+	va_list args;	/* use the ... */
+	va_start(args, format);
+	size_t msg_size = 1 + (size_t)vsnprintf(NULL, 0, format, args);
+	va_end(args);
+
+	char *warning_msg = malloc(msg_size);
+	size_t ret = (size_t)vsnprintf(warning_msg, msg_size, format, args);
+	if (ret > msg_size)
+	{
+		err("Warning message write failed");
+	}
+	
+	printf("\x1B[1m\x1b[31m%s\x1B[0m\n", warning_msg);
 	printf("\x1B[1mPress enter to continue\x1B[0m\n");
+
+	free(warning_msg);
 
 	getchar();
 }
