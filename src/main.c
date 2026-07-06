@@ -15,25 +15,38 @@ int main(int argc, char *argv[])
 	return 0; /* c90 return value */
 }
 
-void err(const char *error_message)
+void err(const char *restrict format, ...)
 {
-	if (error_message == NULL)
+	va_list args, copy;
+	va_start(args, format);
+	va_copy(copy, args);
+
+	/* calculate the length of the message */
+	size_t msg_size = 1 + (size_t)vsnprintf(NULL, 0, format, copy);
+	va_end(copy);
+
+	/* allocate memory for the error message */
+	char *error_msg = malloc(msg_size);
+	/* check for a potential malloc() fail */
+	if (error_msg == NULL)
 	{
-		exit(1);
+		err("malloc() failed to allocate memory");
+	}
+	/* write to buffer & compare return value with msg size calculated previously */
+	size_t ret = (size_t)vsnprintf(error_msg, msg_size, format, args);
+	va_end(args);
+
+	if (ret > msg_size)
+	{
+		err("Error message write failed");
 	}
 
-	const char *message_template = "%s: %s"; /* program_name then the message */
+	/* const char *message_template = "%s: %s";  program_name then the message */
 
 	/* calculate message length */
-	size_t message_len = 1 + (size_t)snprintf(NULL, 0, message_template, program_name, error_message);
 
-	/* allocate memory for the message buffer */
-	char *message = malloc(message_len);
-	/* write to message buffer using snprintf */
-	snprintf(message, message_len, message_template, program_name, error_message);
-
-	fprintf(stderr, "\x1b[31m%s\x1B[0m\n", message);
-	free(message);
+	fprintf(stderr, "\x1b[31m%s\x1B[0m\n", error_msg);
+	free(error_msg);
 
 	exit(1);
 }
@@ -44,9 +57,11 @@ void warn(const char *restrict format, ...)
 	va_start(args, format);
 	va_copy(copy, args);
 
+	/* calculate the length of the message */
 	size_t msg_size = 1 + (size_t)vsnprintf(NULL, 0, format, copy);
 	va_end(copy);
 
+	/* allocate memory for the warning message */
 	char *warning_msg = malloc(msg_size);
 	if (warning_msg == NULL)
 	{
@@ -54,6 +69,7 @@ void warn(const char *restrict format, ...)
 	}
 	size_t ret = (size_t)vsnprintf(warning_msg, msg_size, format, args);
 	va_end(args);
+
 	if (ret > msg_size)
 	{
 		err("Warning message write failed");
