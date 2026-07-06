@@ -55,18 +55,13 @@ int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uin
 		}
 		
 		/* write to current_entry buffer */
-		char buf[max_line_length];
-		snprintf(buf, max_line_length, track_time_template, 
+		snprintf(time_table[i], max_line_length, track_time_template, 
 				track_time->year,
 				track_time->month,
 				track_time->day,
 				track_time->hour,
 				track_time->minute,
 				track_time->second);
-		printf("%zu\n", strlen(time_table[i]));
-
-		strncpy(time_table[i], buf, max_line_length);
-		
 	}
 
 	for (uint32_t i = 0; i < num_waypoints; i++)

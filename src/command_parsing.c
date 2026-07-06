@@ -5,6 +5,7 @@ int command_parsing(int num_args, char *arguments[])
 	uint32_t final_time = 1;
 	uint32_t interval_time = 0;
 	struct maptime date = current_time();
+	uint32_t num_waypoints = 0;
 
 	for (int i = 0; i < num_args; i++)
 	{
@@ -14,7 +15,7 @@ int command_parsing(int num_args, char *arguments[])
 			{
 				printf("interval mode\n");
 			}
-			final_time = time_parsing(&i, num_args, arguments);
+			interval_time = time_parsing(&i, num_args, arguments);
 			printf("Interval time is: %u\n", interval_time);
 		}
 		else if (strcmp(arguments[i], "-t") == 0)
