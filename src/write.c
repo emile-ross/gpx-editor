@@ -16,7 +16,7 @@ int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uin
 
 	const char *track_time_template = "<when>%u-%u-%uT%02u:%02u:%02uZ</when>";
 
-	char (*time_table)[num_waypoints] = malloc(max_line_length*num_waypoints);
+	char (*time_table)[max_line_length] = malloc(max_line_length*num_waypoints);
 
 	for (uint32_t i = 0; i < num_waypoints; i++)
 	{
@@ -55,13 +55,23 @@ int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uin
 		}
 		
 		/* write to current_entry buffer */
-		snprintf(time_table[i], max_line_length, track_time_template, 
+		char buf[max_line_length];
+		snprintf(buf, max_line_length, track_time_template, 
 				track_time->year,
 				track_time->month,
 				track_time->day,
 				track_time->hour,
 				track_time->minute,
 				track_time->second);
+		printf("%zu\n", strlen(time_table[i]));
+
+		strncpy(time_table[i], buf, max_line_length);
+		
+	}
+
+	for (uint32_t i = 0; i < num_waypoints; i++)
+	{
+		printf("%s\n", time_table[i]);
 	}
 
 	free(time_table);

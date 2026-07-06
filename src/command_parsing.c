@@ -67,8 +67,7 @@ int command_parsing(int num_args, char *arguments[])
 	stotime(final_time, &num_hours, &num_minutes, &num_seconds);
 
 	printf("seconds: %d\nminutes: %d\nhours: %d\n", num_seconds, num_minutes, num_hours);
-
-	forwards_write(&date, 8, interval_time);
+	forwards_write(&date, 9, interval_time);
 
 	return 0;
 }
