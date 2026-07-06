@@ -71,3 +71,17 @@ bool conversion_check(const char *endptr, const char *input_string, const bool n
 	}
 	return true;
 }
+
+void bound_check(uint64_t val, uint64_t ub, uint64_t lb)
+{
+	if (val > ub)
+	{
+		err("Input out of bounds");
+	}
+	else if (val < lb)
+	{
+		err("Input out of bounds");
+
+	}
+}
+
