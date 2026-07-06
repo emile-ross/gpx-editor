@@ -33,7 +33,7 @@ typedef struct
 	extern const bool ignore_errors;
 
 void clear(void);
-int conversion_check(const char *endptr, const char *input_string, const bool newline);
+bool conversion_check(const char *endptr, const char *input_string, const bool newline);
 void wait(long quarters, long seconds);	/* waits for a certain time */
 void err(const char *error_message);
 int command_parsing(int num_args, char *arguments[]);

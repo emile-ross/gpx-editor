@@ -24,7 +24,7 @@ long time_parsing(int *flag_r_index, int num_args, char *argument[])
 
 			/* no need to convert since this is already in seconds */
 			duration += strtol(argument[i], &endptr, 10);
-			if (conversion_check(endptr, argument[i], false) == 0)
+			if (conversion_check(endptr, argument[i], false))
 				valid_arg = true;
 			else
 				parsing_fail("seconds");
@@ -36,7 +36,7 @@ long time_parsing(int *flag_r_index, int num_args, char *argument[])
 			/* convert minutes to seconds */
 			uint8_t minutes = (uint8_t)strtol(argument[i], &endptr, 10);
 			duration += (long)(minutes * 60);
-			if (conversion_check(endptr, argument[i], false) == 0)
+			if (conversion_check(endptr, argument[i], false))
 				valid_arg = true;
 			else
 				parsing_fail("minutes");
@@ -47,7 +47,7 @@ long time_parsing(int *flag_r_index, int num_args, char *argument[])
 			/* convert hours to seconds */
 			uint8_t hours = (uint8_t)strtol(argument[i], &endptr, 10);
 			duration += (long)(hours * 3600);
-			if (conversion_check(endptr, argument[i], false) == 0)
+			if (conversion_check(endptr, argument[i], false))
 				valid_arg = true;
 			else
 				parsing_fail("hours");

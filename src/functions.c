@@ -42,7 +42,7 @@ void wait(long quarters, long seconds)
     	nanosleep(&install_timer, NULL);	/* execute nanosleep function and pass in the timespect struct */
 }
 
-int conversion_check(const char *endptr, const char *input_string, const bool newline)
+bool conversion_check(const char *endptr, const char *input_string, const bool newline)
 {
 	/* this doesn't need any error messages 
 	 * they will be handled by the function callee */
@@ -51,22 +51,23 @@ int conversion_check(const char *endptr, const char *input_string, const bool ne
 		/* exits if valid */
 		if (*endptr == '\0')
 		{
-			return 0;
+			return true;
 		}
 
 		if (strcmp(endptr, input_string) == 0)
 		{
-			return 1;
+			/* nothing in the string matches */
+			return false;
 		}
 
 		if (newline)
 		{
 			if (*endptr == '\n')
 			{
-				return 0;
+				return true;
 			}
 		}
-		return 1;
+		return false;
 	}
-	return 0;
+	return true;
 }
