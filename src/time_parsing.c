@@ -2,7 +2,7 @@
 
 void parsing_fail(char *time_type_msg);
 
-long time_parsing(int *flag_r_index, int num_args, char *argument[])
+uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[])
 {
 	if (*flag_r_index > 255 || *flag_r_index < 0)
 	{

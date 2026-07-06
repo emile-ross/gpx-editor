@@ -2,8 +2,8 @@
 
 int command_parsing(int num_args, char *arguments[])
 {
-	unsigned long final_time = 1;
-	unsigned long interval_time = 0;
+	uint32_t final_time = 1;
+	uint32_t interval_time = 0;
 	struct maptime date = current_time();
 
 	for (int i = 0; i < num_args; i++)
@@ -14,9 +14,8 @@ int command_parsing(int num_args, char *arguments[])
 			{
 				printf("interval mode\n");
 			}
-			interval_time = (unsigned long)time_parsing(&i, num_args, arguments);
-			final_time = interval_time;
-			printf("Interval time is: %lu\n", interval_time);
+			final_time = time_parsing(&i, num_args, arguments);
+			printf("Interval time is: %u\n", interval_time);
 		}
 		else if (strcmp(arguments[i], "-t") == 0)
 		{
@@ -25,9 +24,8 @@ int command_parsing(int num_args, char *arguments[])
 				printf("total time mode\n");
 			}
 
-			unsigned long total_time_input = (unsigned long)time_parsing(&i, num_args, arguments);
-			final_time = total_time_input;
-			printf("total time specified is: %lu\n", total_time_input);
+			final_time = time_parsing(&i, num_args, arguments);
+			printf("total time specified is: %u\n", final_time);
 		}
 		else if (strcmp(arguments[i], "--start-time") == 0 || strcmp(arguments[i], "-s") == 0)
 		{

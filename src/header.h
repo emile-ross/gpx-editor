@@ -38,7 +38,7 @@ void wait(long quarters, long seconds);	/* waits for a certain time */
 void err(const char *error_message);
 int command_parsing(int num_args, char *arguments[]);
 
-long time_parsing(int *flag_r_index, int num_args, char *argument[]);
+uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[]);
 uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, bool eight_bit_conversion);
 
 void stotime(unsigned long total_seconds, uint8_t *hours, uint8_t *minutes, uint8_t *seconds);
