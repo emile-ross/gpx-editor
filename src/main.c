@@ -36,3 +36,12 @@ void err(const char *error_message)
 
 	exit(1);
 }
+
+void warn(char *message)
+{
+	printf("\x1B[1m\x1b[31m%s\x1B[0m\n", message);
+	printf("\x1B[1mPress enter to continue\x1B[0m\n");
+
+	getchar();
+}
+

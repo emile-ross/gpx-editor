@@ -20,6 +20,7 @@ int command_parsing(int num_args, char *arguments[])
 		}
 		else if (strcmp(arguments[i], "-t") == 0)
 		{
+			warn("The -t flag is not in use");
 			if (verbose)
 			{
 				printf("total time mode\n");

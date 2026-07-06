@@ -36,10 +36,12 @@ typedef struct
 	extern const bool verbose;
 	extern const bool ignore_errors;
 
+void err(const char *error_message);
+void warn(char *message);
+
 void clear(void);
 bool conversion_check(const char *endptr, const char *input_string, const bool newline);
 void wait(long quarters, long seconds);	/* waits for a certain time */
-void err(const char *error_message);
 int command_parsing(int num_args, char *arguments[]);
 
 uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[]);
