@@ -72,7 +72,7 @@ bool conversion_check(const char *endptr, const char *input_string, const bool n
 	return true;
 }
 
-void bound_check(uint64_t val, uint64_t ub, uint64_t lb)
+void bound_check(int64_t val, uint64_t lb, uint64_t ub)
 {
 	if (val > ub)
 	{

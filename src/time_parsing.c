@@ -61,7 +61,10 @@ uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[])
 			}
 		}
 	}
-	return duration;
+
+	bound_check(duration, 0, UINT32MAX);
+	uint32_t val = (uint32_t)duration;
+	return val;
 }
 
 
