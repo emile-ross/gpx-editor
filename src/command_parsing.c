@@ -13,7 +13,7 @@ int command_parsing(uint8_t num_args, char *arguments[])
 		Bool useless_flag = False;
 
 		const uint8_t initial_index = i;
-		if (strcmp(arguments[i], "-i") == 0)
+		if (strcmp(arguments[i], "-i") == 0 || strcmp(arguments[i], "--interval") == 0)
 		{
 			if (verbose)
 			{
