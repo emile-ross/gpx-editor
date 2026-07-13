@@ -1,7 +1,6 @@
 #define _POSIX_C_SOURCE 199309L
 
 #include <limits.h>
-#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,27 +31,27 @@ typedef struct maptime
 
 typedef struct
 {
-	bool interval_specified;
-	bool start_time_specified;
-	bool end_time_specified;
+	Bool interval_specified;
+	Bool start_time_specified;
+	Bool end_time_specified;
 }  output_arguments_bl;
 
 /* global variables */
 	extern const char *program_name;
-	extern const bool verbose;
-	extern const bool ignore_errors;
+	extern const Bool verbose;
+	extern const Bool ignore_errors;
 
 void err(const char *restrict format, ...);
 void warn(const char *restrict format, ...);
 
 void clear(void);
-bool conversion_check(const char *endptr, const char *input_string, const bool newline);
+Bool conversion_check(const char *endptr, const char *input_string, const Bool newline);
 void wait(long quarters, long seconds);	/* waits for a certain time */
 int command_parsing(int num_args, char *arguments[]);
 
 uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[]);
-uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, bool eight_bit_conversion);
-bool bound_check(int64_t val, int64_t lb, int64_t ub);
+uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, Bool eight_bit_conversion);
+Bool bound_check(int64_t val, int64_t lb, int64_t ub);
 
 void stotime(unsigned long total_seconds, uint8_t *hours, uint8_t *minutes, uint8_t *seconds);
 
