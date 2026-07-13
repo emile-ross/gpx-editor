@@ -8,7 +8,7 @@ enum flag_type
 	total_time,
 	interval_time,
 	start_time,
-	cap_time,
+	cap_time
 };
 
 typedef enum 

@@ -8,7 +8,6 @@ uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[])
 	uint32_t duration = 0;
 	uint8_t num_valid_args = 0;
 	int i = flag_r;
-	uint32_t val;
 
 	if (*flag_r_index > 255 || *flag_r_index < 0)
 	{
@@ -90,7 +89,7 @@ uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[])
 	}
 
 	bound_check(duration, 0, UINT32MAX);
-	val = (uint32_t)duration;
+	uint32_t val = (uint32_t)duration;
 	return val;
 }
 

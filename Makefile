@@ -1,4 +1,4 @@
-FLAGS = -Wconversion -Wall -Wextra -std=c99 -Wpedantic -Wshadow -Wswitch-enum -Wunreachable-code -g 
+FLAGS = -Wconversion -Wall -Wextra -std=gnu99 -Wpedantic -Wshadow -Wswitch-enum -Wunreachable-code -g 
 Z = clang
 
 SOURCE_DIR := src
