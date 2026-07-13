@@ -7,9 +7,7 @@ int command_parsing(uint8_t num_args, char *arguments[])
 	struct maptime date = current_time();
 	uint32_t num_waypoints = 0;
 	uint8_t num_seconds, num_minutes, num_hours;
-	size_t time_msg_size;
 
-	
 	for (uint8_t i = 0; i < num_args; i++)
 	{
 		Bool useless_flag = False;
@@ -39,7 +37,7 @@ int command_parsing(uint8_t num_args, char *arguments[])
 		{
 			/* get user input on the chosen time and store it in maptime date struct */
 			date = date_input();
-			time_msg_size = timetotext(NULL, &date);	/* calculate buffer size */
+			size_t time_msg_size = timetotext(NULL, &date);	/* calculate buffer size */
 
 			char *time_msg = malloc(time_msg_size);
 			timetotext(time_msg, &date);
@@ -58,7 +56,7 @@ int command_parsing(uint8_t num_args, char *arguments[])
 
 			/* get user input on the chosen time and store it in maptime date struct */
 			date = date_input();
-			time_msg_size = timetotext(NULL, &date);	/* calculate buffer size */
+			size_t time_msg_size = timetotext(NULL, &date);	/* calculate buffer size */
 
 			char *time_msg = malloc(time_msg_size);
 			timetotext(time_msg, &date);

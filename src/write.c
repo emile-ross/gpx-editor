@@ -1,22 +1,14 @@
 #include "header.h"
 
 const Bool error_checking = True;
-const size_t max_line_length = 128;
 
 int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uint32_t time_interval)
 {
-	/*
-	 * members of the struct:
-	track_time->year;
-	track_time->month;
-	track_time->day;
-	track_time->hour;
-	track_time->second;
-	*/
-
 	const char *track_time_template = "<when>%u-%u-%uT%02u:%02u:%02uZ</when>";
+	const size_t max_line_length = 128;	/* max length in valid characters (from <when> to </when>) */
+	const size_t line_size = max_line_length + 1;	/* account for NULL terminator */
 
-	char (*time_table)[max_line_length] = malloc(max_line_length*num_waypoints);
+	char (*time_table)[line_size] = malloc(line_size*num_waypoints);
 
 	for (uint32_t i = 0; i < num_waypoints; i++)
 	{

@@ -7,11 +7,11 @@ uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, B
 	uint16_t integer_max;
 	if (eight_bit_conversion)
 	{
-		integer_max = 255;
+		integer_max = UINT8MAX;
 	}
 	else
 	{
-		integer_max = 65535;
+		integer_max = UINT16MAX;
 	}
 
 	uint8_t i = 0;
