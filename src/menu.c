@@ -1,17 +1,17 @@
 #include "header.h"
 
-bool match_input_type(int choice, struct maptime *date_target);
+Bool match_input_type(int choice, struct maptime *date_target);
 
 struct maptime date_input(void)
 {
-	bool first_input = true;
+	Bool first_input = True;
 
 	struct maptime final_time = current_time();
 
 	final_time.second = 0;	/* seconds are set to 0 by default */
 
 	int choice = -1;
-	bool valid_choice = false;
+	Bool valid_choice = False;
 
 	while (choice != 0)
 	{
@@ -54,7 +54,7 @@ struct maptime date_input(void)
 			if (!(choice_temp > 6 || choice_temp < 0))
 			{
 				choice = (int)choice_temp;
-				valid_choice = true;
+				valid_choice = True;
 			}
 
 			if (valid_choice)
@@ -63,7 +63,7 @@ struct maptime date_input(void)
 
 				if (valid_choice)
 				{
-					first_input = false;
+					first_input = False;
 				}
 			}
 		}
@@ -99,44 +99,44 @@ size_t timetotext(char *target, struct maptime *date)
 	return time_size;
 }
 
-bool match_input_type(int choice, struct maptime *date_target)
+Bool match_input_type(int choice, struct maptime *date_target)
 {
 	uint16_t date = 0;
 	switch (choice)
 	{
 		case 1:
-			date = get_time(0, 65535, "year", false);
+			date = get_time(0, 65535, "year", False);
 			date_target->year = date;
 			break;
 	
 		case 2:
-			date = get_time(1, 12, "months", true);
+			date = get_time(1, 12, "months", True);
 			date_target->month = (uint8_t)date;
 			break;
 			
 		case 3:
-			date = get_time(1, 31, "days", true);
+			date = get_time(1, 31, "days", True);
 			date_target->day = (uint8_t)date;
 			break;
 	
 		case 4:
-			date = get_time(0, 23, "hours", true);
+			date = get_time(0, 23, "hours", True);
 			date_target->hour = (uint8_t)date;
 			break;
 	
 		case 5:
-			date = get_time(0, 59, "minutes", true);
+			date = get_time(0, 59, "minutes", True);
 			date_target->minute = (uint8_t)date;
 			break;
 	
 		case 6:
-			date = get_time(0, 59, "seconds", true);
+			date = get_time(0, 59, "seconds", True);
 			date_target->second = (uint8_t)date;
 			break;
 	
 		default:
-			return false;
+			return False;
 			break;
 	}
-	return true;
+	return True;
 }

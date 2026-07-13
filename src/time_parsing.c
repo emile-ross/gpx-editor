@@ -23,15 +23,15 @@ uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[])
 		}
 		char *endptr = NULL;
 		long date_arg = strtol(argument[next_index], &endptr, 10);
-		bool valid_arg = false;
+		Bool valid_arg = False;
 
 		if (strcmp(argument[i], "-S") == 0)
 		{
 			i++; /* read ahead */
 
 			/* no need to convert since this is already in seconds */
-			if (conversion_check(endptr, argument[i], false))
-				valid_arg = true;
+			if (conversion_check(endptr, argument[i], False))
+				valid_arg = True;
 			else
 				parsing_fail("seconds");
 
@@ -46,8 +46,8 @@ uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[])
 		{
 			i++; /* read ahead */
 			/* convert minutes to seconds */
-			if (conversion_check(endptr, argument[i], false))
-				valid_arg = true;
+			if (conversion_check(endptr, argument[i], False))
+				valid_arg = True;
 			else
 				parsing_fail("minutes");
 
@@ -61,8 +61,8 @@ uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[])
 		{
 			i++; /* read ahead */
 			/* convert hours to seconds */
-			if (conversion_check(endptr, argument[i], false))
-				valid_arg = true;
+			if (conversion_check(endptr, argument[i], False))
+				valid_arg = True;
 			else
 				parsing_fail("hours");
 
