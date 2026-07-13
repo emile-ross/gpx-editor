@@ -1,5 +1,5 @@
-FLAGS = -Wconversion -Wall -Wextra -std=c99 -Wpedantic -Wshadow -Wswitch-enum -Wunreachable-code
-Z = zig cc
+FLAGS = -Wconversion -Wall -Wextra -std=c99 -Wpedantic -Wshadow -Wswitch-enum -Wunreachable-code -g 
+Z = clang
 
 SOURCE_DIR := src
 filenames := write output current_time config menu input functions main command_parsing time_parsing
