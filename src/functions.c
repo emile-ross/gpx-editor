@@ -76,12 +76,12 @@ Bool bound_check(int64_t val, int64_t lb, int64_t ub)
 {
 	if (val > ub)
 	{
-		err("Input out of bounds");
+		err("Input out of bounds\n%d is greater than %d (the upper bound)", val, ub);
 		return False;
 	}
 	else if (val < lb)
 	{
-		err("Input out of bounds");
+		err("Input out of bounds\n%d is lower than %d (the lower bound)", val, lb);
 		return False;
 	}
 	return True;
