@@ -1,6 +1,6 @@
 #include "header.h"
 
-const bool error_checking = true;
+const Bool error_checking = True;
 const size_t max_line_length = 128;
 
 int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uint32_t time_interval)

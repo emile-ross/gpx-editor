@@ -1,6 +1,6 @@
 #include "header.h"
 
-uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, bool eight_bit_conversion)
+uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, Bool eight_bit_conversion)
 {
 	long date_input;
 

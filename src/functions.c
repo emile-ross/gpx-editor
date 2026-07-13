@@ -42,7 +42,7 @@ void wait(long quarters, long seconds)
     	nanosleep(&install_timer, NULL);	/* execute nanosleep function and pass in the timespect struct */
 }
 
-bool conversion_check(const char *endptr, const char *input_string, const bool newline)
+Bool conversion_check(const char *endptr, const char *input_string, const Bool newline)
 {
 	/* this doesn't need any error messages 
 	 * they will be handled by the function callee */
@@ -51,39 +51,39 @@ bool conversion_check(const char *endptr, const char *input_string, const bool n
 		/* exits if valid */
 		if (*endptr == '\0')
 		{
-			return true;
+			return True;
 		}
 
 		if (strcmp(endptr, input_string) == 0)
 		{
 			/* nothing in the string matches */
-			return false;
+			return False;
 		}
 
 		if (newline)
 		{
 			if (*endptr == '\n')
 			{
-				return true;
+				return True;
 			}
 		}
-		return false;
+		return False;
 	}
-	return true;
+	return True;
 }
 
-bool bound_check(int64_t val, int64_t lb, int64_t ub)
+Bool bound_check(int64_t val, int64_t lb, int64_t ub)
 {
 	if (val > ub)
 	{
 		err("Input out of bounds");
-		return false;
+		return False;
 	}
 	else if (val < lb)
 	{
 		err("Input out of bounds");
-		return false;
+		return False;
 	}
-	return true;
+	return True;
 }
 
