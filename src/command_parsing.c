@@ -10,9 +10,9 @@ int command_parsing(uint8_t num_args, char *arguments[])
 
 	for (uint8_t i = 0; i < num_args; i++)
 	{
+		uint8_t next_index = i + 1;
 		Bool useless_flag = False;
 
-		const uint8_t initial_index = i;
 		if (strcmp(arguments[i], "-i") == 0 || strcmp(arguments[i], "--interval") == 0)
 		{
 			if (verbose)
@@ -73,8 +73,7 @@ int command_parsing(uint8_t num_args, char *arguments[])
 				strcmp(arguments[i], "-w") == 0 || strcmp(arguments[i], "--waypoints") == 0)
 		{
 			char *endptr = NULL;
-			uint8_t index = i + 1;
-			long temp_points = strtol(arguments[index], &endptr, 10);
+			long temp_points = strtol(arguments[next_index], &endptr, 10);
 			if (*endptr != '\0')
 			{
 				err("Failed to convert points to integer");
@@ -87,7 +86,7 @@ int command_parsing(uint8_t num_args, char *arguments[])
 		if (useless_flag)
 		{
 			/* display warning message */
-			warn("The %s flag will not be used by the program", arguments[initial_index]);
+			warn("The %s flag will not be used by the program", arguments[i]);
 		}
 	}
 

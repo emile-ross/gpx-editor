@@ -36,9 +36,11 @@ struct maptime current_time(void)
 
 void time_initialisation(struct maptime* initial_time)
 {
-	initial_time->month = 255;
-	initial_time->day = 255;
-	initial_time->hour = 255;
-	initial_time->minute = 255;
-	initial_time->second = 255;
+	/* this initialises the initial_time struct with the integer max 
+	 * in order to make it clear that this struct is empty */
+	initial_time->month = UINT8MAX;
+	initial_time->day = UINT8MAX;
+	initial_time->hour = UINT8MAX;
+	initial_time->minute = UINT8MAX;
+	initial_time->second = UINT8MAX;
 }
