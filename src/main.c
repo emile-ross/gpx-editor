@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 		err("Too many arguments max is %d", max_num_args);
 	}
 
-	command_parsing(argc, argv);
+	command_parsing((uint8_t)argc, argv);
 
 	return 0; /* c90 return value */
 }

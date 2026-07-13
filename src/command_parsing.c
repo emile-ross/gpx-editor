@@ -1,6 +1,6 @@
 #include "header.h"
 
-int command_parsing(int num_args, char *arguments[])
+int command_parsing(uint8_t num_args, char *arguments[])
 {
 	uint32_t final_time = 1;
 	uint32_t interval_time = 0;
@@ -10,11 +10,11 @@ int command_parsing(int num_args, char *arguments[])
 	size_t time_msg_size;
 
 	
-	for (int i = 0; i < num_args; i++)
+	for (uint8_t i = 0; i < num_args; i++)
 	{
 		Bool useless_flag = False;
 
-		const int initial_index = i;
+		const uint8_t initial_index = i;
 		if (strcmp(arguments[i], "-i") == 0)
 		{
 			if (verbose)
@@ -75,7 +75,7 @@ int command_parsing(int num_args, char *arguments[])
 				strcmp(arguments[i], "-w") == 0 || strcmp(arguments[i], "--waypoints") == 0)
 		{
 			char *endptr = NULL;
-			int index = i + 1;
+			uint8_t index = i + 1;
 			long temp_points = strtol(arguments[index], &endptr, 10);
 			if (*endptr != '\0')
 			{
