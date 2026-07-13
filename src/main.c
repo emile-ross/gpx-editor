@@ -10,6 +10,11 @@ int main(int argc, char *argv[])
 		err("expected arguments");
 	}
 
+	if (argc > max_num_args)
+	{
+		err("Too many arguments max is %d", max_num_args);
+	}
+
 	command_parsing(argc, argv);
 
 	return 0; /* c90 return value */

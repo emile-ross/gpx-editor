@@ -8,10 +8,9 @@ int command_parsing(int num_args, char *arguments[])
 	uint32_t num_waypoints = 0;
 	uint8_t num_seconds, num_minutes, num_hours;
 	size_t time_msg_size;
-	char *time_msg;	/* used in start time and end time */
 
-	int i = 0;
-	for (; i < num_args; i++)
+	
+	for (int i = 0; i < num_args; i++)
 	{
 		Bool useless_flag = False;
 
@@ -42,7 +41,7 @@ int command_parsing(int num_args, char *arguments[])
 			date = date_input();
 			time_msg_size = timetotext(NULL, &date);	/* calculate buffer size */
 
-			time_msg = malloc(time_msg_size);
+			char *time_msg = malloc(time_msg_size);
 			timetotext(time_msg, &date);
 			printf("%s\n", time_msg);
 
@@ -61,7 +60,7 @@ int command_parsing(int num_args, char *arguments[])
 			date = date_input();
 			time_msg_size = timetotext(NULL, &date);	/* calculate buffer size */
 
-			time_msg = malloc(time_msg_size);
+			char *time_msg = malloc(time_msg_size);
 			timetotext(time_msg, &date);
 			printf("%s\n", time_msg);
 

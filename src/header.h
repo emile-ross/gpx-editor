@@ -13,6 +13,8 @@
 #define UINT16MAX (65535)
 #define UINT32MAX (4294967295)
 
+#define max_num_args (255)
+
 typedef struct maptime
 {
 	uint16_t year;
