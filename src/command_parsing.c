@@ -6,10 +6,11 @@ int command_parsing(int num_args, char *arguments[])
 	uint32_t interval_time = 0;
 	struct maptime date = current_time();
 	uint32_t num_waypoints = 0;
+	uint8_t num_seconds, num_minutes, num_hours;
 
 	for (int i = 0; i < num_args; i++)
 	{
-		bool useless_flag = false;
+		Bool useless_flag = False;
 
 		const int initial_index = i;
 		if (strcmp(arguments[i], "-i") == 0)
@@ -23,7 +24,7 @@ int command_parsing(int num_args, char *arguments[])
 		}
 		else if (strcmp(arguments[i], "-t") == 0)
 		{
-			useless_flag = true;
+			useless_flag = True;
 			if (verbose)
 			{
 				printf("total time mode\n");
@@ -51,7 +52,7 @@ int command_parsing(int num_args, char *arguments[])
 		}
 		else if (strcmp(arguments[i], "--end-time") == 0 || strcmp(arguments[i], "-e") == 0)
 		{
-			useless_flag = true;
+			useless_flag = True;
 
 			/* get user input on the chosen time and store it in maptime date struct */
 			date = date_input();
@@ -90,7 +91,6 @@ int command_parsing(int num_args, char *arguments[])
 		}
 	}
 
-	uint8_t num_seconds, num_minutes, num_hours;
 	stotime(final_time, &num_hours, &num_minutes, &num_seconds);
 
 	printf("seconds: %d\nminutes: %d\nhours: %d\n", num_seconds, num_minutes, num_hours);

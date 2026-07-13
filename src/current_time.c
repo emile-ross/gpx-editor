@@ -1,13 +1,13 @@
 #include "header.h"
 
-bool in_bounds(int input)
+Bool in_bounds(int input)
 {
 	if (input > 65535 || input < 0)
 	{
 		err("Out of bounds input");
-		return false;
+		return False;
 	}
-	return true;
+	return True;
 }
 
 void time_initialisation(struct maptime* initial_time);

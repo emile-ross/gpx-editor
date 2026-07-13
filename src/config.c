@@ -1,6 +1,6 @@
 #include "header.h"
 
 
-const bool ignore_errors = false;
+const Bool ignore_errors = False;
 
-const bool verbose = false;
+const Bool verbose = False;
