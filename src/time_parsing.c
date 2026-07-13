@@ -4,16 +4,18 @@ void parsing_fail(char *time_type_msg);
 
 uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[])
 {
+	uint8_t flag_r = (uint8_t)*flag_r_index;
+	uint32_t duration = 0;
+	uint8_t num_valid_args = 0;
+	int i = flag_r;
+	uint32_t val;
+
 	if (*flag_r_index > 255 || *flag_r_index < 0)
 	{
 		err("Invalid number of arguments");
 	}
 
-	uint8_t flag_r = (uint8_t)*flag_r_index;
-	uint32_t duration = 0;
-	uint8_t num_valid_args = 0;
-
-	for (int i = flag_r; i < num_args; i++)
+	for (; i < num_args; i++)
 	{
 		int next_index = i + 1;
 		if (!(next_index < num_args))
@@ -88,7 +90,7 @@ uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[])
 	}
 
 	bound_check(duration, 0, UINT32MAX);
-	uint32_t val = (uint32_t)duration;
+	val = (uint32_t)duration;
 	return val;
 }
 
