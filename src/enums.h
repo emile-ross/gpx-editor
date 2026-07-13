@@ -10,3 +10,9 @@ enum flag_type
 	start_time,
 	cap_time,
 };
+
+typedef enum 
+{
+	False = 0,
+	True = 1
+} Bool;
