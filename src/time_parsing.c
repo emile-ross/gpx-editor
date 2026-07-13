@@ -2,7 +2,7 @@
 
 void parsing_fail(char *time_type_msg);
 
-uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[])
+uint32_t time_parsing(uint8_t *flag_r_index, uint8_t num_args, char *argument[])
 {
 	if (*flag_r_index > 255 || *flag_r_index < 0)
 	{
@@ -13,9 +13,9 @@ uint32_t time_parsing(int *flag_r_index, int num_args, char *argument[])
 	uint32_t duration = 0;
 	uint8_t num_valid_args = 0;
 
-	for (int i = flag_r; i < num_args; i++)
+	for (uint8_t i = flag_r; i < num_args; i++)
 	{
-		int next_index = i + 1;
+		uint8_t next_index = i + 1;
 		if (!(next_index < num_args))
 		{
 			err("Missing flags in time parsing\nUse flags for specifying the time \"-S\", \"-M\" or \"-H\"");

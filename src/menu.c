@@ -39,15 +39,14 @@ struct maptime date_input(void)
 		printf("\nSave and exit:  0\n");
 
 		char buffer[100];
-		char *endptr;
-		long choice_temp = -1;
-
 		if (fgets(buffer, sizeof(buffer), stdin) == NULL)
 		{
-			printf("Failed to parse input.\n");
+			fprintf(stderr, "Failed to parse input.\n");
 			exit(-1);
 		}
 
+		long choice_temp = -1;
+		char *endptr;
 		choice_temp = strtol(buffer, &endptr, 10);
 		if (*endptr == '\n' && endptr != buffer)
 		{
