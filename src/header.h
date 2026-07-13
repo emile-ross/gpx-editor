@@ -8,29 +8,13 @@
 #include <time.h>
 
 #include "enums.h"
+#include "structs.h"
 
 #define UINT8MAX (255)
 #define UINT16MAX (65535)
 #define UINT32MAX (4294967295)
 
 #define max_num_args (255)
-
-typedef struct maptime
-{
-	uint16_t year;
-	uint8_t month;
-	uint8_t day;
-	uint8_t hour;
-	uint8_t minute;
-	uint8_t second;
-} MapTime;
-
-typedef struct
-{
-	Bool interval_specified;
-	Bool start_time_specified;
-	Bool end_time_specified;
-}  output_arguments_bl;
 
 /* global variables */
 	extern const char *program_name;
@@ -52,7 +36,4 @@ Bool bound_check(int64_t val, int64_t lb, int64_t ub);
 void stotime(unsigned long total_seconds, uint8_t *hours, uint8_t *minutes, uint8_t *seconds);
 
 size_t timetotext(char *target, struct maptime *date);
-struct maptime current_time(void);
-struct maptime date_input(void);
-
 int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uint32_t time_interval);
