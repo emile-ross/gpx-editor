@@ -14,6 +14,12 @@
 #define UINT16MAX (65535)
 #define UINT32MAX (4294967295)
 
+typedef enum 
+{
+	False = 0,
+	True = 1
+} Bool;
+
 typedef struct maptime
 {
 	uint16_t year;
