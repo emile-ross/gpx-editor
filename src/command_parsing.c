@@ -3,7 +3,7 @@
 int command_parsing(uint8_t num_args, char *arguments[])
 {
 	uint32_t final_time = 1;
-	uint32_t interval_time = 0;
+	uint32_t time_interval_int = 0;
 	struct maptime date = current_time();
 	uint32_t num_waypoints = 0;
 	uint8_t num_seconds, num_minutes, num_hours;
@@ -19,8 +19,8 @@ int command_parsing(uint8_t num_args, char *arguments[])
 			{
 				printf("interval mode\n");
 			}
-			interval_time = time_parsing(&i, num_args, arguments);
-			printf("Interval time is: %u\n", interval_time);
+			time_interval_int = time_parsing(&i, num_args, arguments);
+			printf("Interval time is: %u\n", time_interval_int);
 		}
 		else if (strcmp(arguments[i], "-t") == 0)
 		{
@@ -93,7 +93,7 @@ int command_parsing(uint8_t num_args, char *arguments[])
 	stotime(final_time, &num_hours, &num_minutes, &num_seconds);
 
 	printf("seconds: %d\nminutes: %d\nhours: %d\n", num_seconds, num_minutes, num_hours);
-	forwards_write(&date, num_waypoints, interval_time);
+	forwards_write(&date, num_waypoints, time_interval_int);
 
 	return 0;
 }

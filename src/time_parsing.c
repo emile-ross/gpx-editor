@@ -4,11 +4,6 @@ void parsing_fail(char *time_type_msg);
 
 uint32_t time_parsing(uint8_t *flag_r_index, uint8_t num_args, char *argument[])
 {
-	if (*flag_r_index > 255 || *flag_r_index < 0)
-	{
-		err("Invalid number of arguments");
-	}
-
 	uint8_t flag_r = (uint8_t)*flag_r_index;
 	uint32_t duration = 0;
 	uint8_t num_valid_args = 0;
@@ -21,6 +16,7 @@ uint32_t time_parsing(uint8_t *flag_r_index, uint8_t num_args, char *argument[])
 			err("Missing flags in time parsing\nUse flags for specifying the time \"-S\", \"-M\" or \"-H\"");
 			break;
 		}
+
 		char *endptr = NULL;
 		long date_arg = strtol(argument[next_index], &endptr, 10);
 		Bool valid_arg = False;
