@@ -87,3 +87,13 @@ Bool bound_check(int64_t val, int64_t lb, int64_t ub)
 	return True;
 }
 
+Bool sufficient_args(struct write_cmd_args command_data)
+{
+	if (command_data.starting_time && command_data.num_waypoints)
+	{
+		if (command_data.interval_time)
+			return True;
+	}
+	
+	return False;
+}
