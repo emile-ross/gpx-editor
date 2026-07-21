@@ -79,7 +79,7 @@ int command_parsing(uint8_t *num_args, char *arguments[])
 			command_data.num_waypoints = True;
 			char *endptr = NULL;
 			long temp_points = strtol(arguments[next_index], &endptr, 10);
-			if (*endptr != '\0')
+			if (*(endptr) != '\0')
 			{
 				err("Failed to convert points to integer");
 			}
@@ -98,6 +98,10 @@ int command_parsing(uint8_t *num_args, char *arguments[])
 	stotime(final_time, &num_hours, &num_minutes, &num_seconds);
 
 	printf("seconds: %d\nminutes: %d\nhours: %d\n", num_seconds, num_minutes, num_hours);
+	if (sufficient_args(command_data))
+	{
+
+	}
 	forwards_write(&date, num_waypoints, time_interval_int);
 
 	return 0;
