@@ -17,3 +17,12 @@ typedef struct
 
 struct maptime current_time(void);
 struct maptime date_input(void);
+
+struct write_cmd_args
+{
+	Bool interval_time;
+	Bool starting_time;
+	Bool ending_time;
+	Bool num_waypoints;
+};
+

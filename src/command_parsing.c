@@ -7,6 +7,7 @@ int command_parsing(uint8_t *num_args, char *arguments[])
 	struct maptime date = current_time();
 	uint32_t num_waypoints = 0;
 	uint8_t num_seconds, num_minutes, num_hours;
+	struct write_cmd_args command_data;
 
 	for (uint8_t i = 0; i < *num_args; i++)
 	{
@@ -15,6 +16,7 @@ int command_parsing(uint8_t *num_args, char *arguments[])
 
 		if (strcmp(arguments[i], "-i") == 0 || strcmp(arguments[i], "--interval") == 0)
 		{
+			command_data.interval_time = True;
 			if (verbose)
 			{
 				printf("interval mode\n");
@@ -35,6 +37,7 @@ int command_parsing(uint8_t *num_args, char *arguments[])
 		}
 		else if (strcmp(arguments[i], "--start-time") == 0 || strcmp(arguments[i], "-s") == 0)
 		{
+			command_data.starting_time = True;
 			/* get user input on the chosen time and store it in maptime date struct */
 			date = date_input();
 			size_t time_msg_size = timetotext(NULL, &date);	/* calculate buffer size */
@@ -52,6 +55,7 @@ int command_parsing(uint8_t *num_args, char *arguments[])
 		}
 		else if (strcmp(arguments[i], "--end-time") == 0 || strcmp(arguments[i], "-e") == 0)
 		{
+			command_data.ending_time = True;
 			useless_flag = True;
 
 			/* get user input on the chosen time and store it in maptime date struct */
@@ -72,6 +76,7 @@ int command_parsing(uint8_t *num_args, char *arguments[])
 		else if (strcmp(arguments[i], "-p") == 0 || strcmp(arguments[i], "--points") == 0 || 
 				strcmp(arguments[i], "-w") == 0 || strcmp(arguments[i], "--waypoints") == 0)
 		{
+			command_data.num_waypoints = True;
 			char *endptr = NULL;
 			long temp_points = strtol(arguments[next_index], &endptr, 10);
 			if (*endptr != '\0')
