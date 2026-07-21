@@ -1,6 +1,6 @@
 #include "header.h"
 
-int command_parsing(uint8_t num_args, char *arguments[])
+int command_parsing(uint8_t *num_args, char *arguments[])
 {
 	uint32_t final_time = 1;
 	uint32_t time_interval_int = 0;
@@ -8,7 +8,7 @@ int command_parsing(uint8_t num_args, char *arguments[])
 	uint32_t num_waypoints = 0;
 	uint8_t num_seconds, num_minutes, num_hours;
 
-	for (uint8_t i = 0; i < num_args; i++)
+	for (uint8_t i = 0; i < *num_args; i++)
 	{
 		uint8_t next_index = i + 1;
 		Bool useless_flag = False;
@@ -19,7 +19,7 @@ int command_parsing(uint8_t num_args, char *arguments[])
 			{
 				printf("interval mode\n");
 			}
-			time_interval_int = time_parsing(&i, num_args, arguments);
+			time_interval_int = time_parsing(&i, *num_args, arguments);
 			printf("Interval time is: %u\n", time_interval_int);
 		}
 		else if (strcmp(arguments[i], "-t") == 0)
@@ -30,7 +30,7 @@ int command_parsing(uint8_t num_args, char *arguments[])
 				printf("total time mode\n");
 			}
 
-			final_time = time_parsing(&i, num_args, arguments);
+			final_time = time_parsing(&i, *num_args, arguments);
 			printf("total time specified is: %u\n", final_time);
 		}
 		else if (strcmp(arguments[i], "--start-time") == 0 || strcmp(arguments[i], "-s") == 0)

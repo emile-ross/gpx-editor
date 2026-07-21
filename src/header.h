@@ -27,7 +27,7 @@ void warn(const char *restrict format, ...);
 void clear(void);
 Bool conversion_check(const char *endptr, const char *input_string, const Bool newline);
 void wait(long quarters, long seconds);	/* waits for a certain time */
-int command_parsing(uint8_t num_args, char *arguments[]);
+int command_parsing(uint8_t *num_args, char *arguments[]);
 
 uint32_t time_parsing(uint8_t *flag_r_index, uint8_t num_args, char *argument[]);
 uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, Bool eight_bit_conversion);
