@@ -92,7 +92,14 @@ Bool sufficient_args(struct write_cmd_args command_data)
 	if (command_data.starting_time && command_data.num_waypoints)
 	{
 		if (command_data.interval_time)
+		{
 			return True;
+		}
+		else if (command_data.ending_time)
+		{
+			fprintf(stderr, "ending time flag isn't used\n");
+			return False;
+		}
 	}
 	
 	return False;
