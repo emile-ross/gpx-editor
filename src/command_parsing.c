@@ -102,6 +102,11 @@ int command_parsing(uint8_t *num_args, char *arguments[])
 	{
 		forwards_write(&date, num_waypoints, time_interval_int);
 	}
+	else
+	{
+		err("Missing arguments in the command\nProvide more arguments in order to write the file");
+		return 1;
+	}
 
 	return 0;
 }
