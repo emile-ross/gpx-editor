@@ -1,6 +1,6 @@
 #include "header.h"
 
-Bool match_input_type(int choice, struct maptime *date_target);
+Bool match_input_type(long choice, struct maptime *date_target);
 
 struct maptime date_input(void)
 {
@@ -10,13 +10,12 @@ struct maptime date_input(void)
 
 	final_time.second = 0;	/* seconds are set to 0 by default */
 
-	int choice = -1;
+	long choice = -1;
 	Bool valid_choice = False;
 
 	while (choice != 0)
 	{
 		clear();
-
 		if (first_input)
 		{
 			printf("The time is set to the current time by default\n");
@@ -46,13 +45,13 @@ struct maptime date_input(void)
 		}
 
 		long choice_temp = -1;
-		char *endptr;
+		char *endptr = NULL;
 		choice_temp = strtol(buffer, &endptr, 10);
 		if (*endptr == '\n' && endptr != buffer)
 		{
 			if (!(choice_temp > 6 || choice_temp < 0))
 			{
-				choice = (int)choice_temp;
+				choice = choice_temp;
 				valid_choice = True;
 			}
 
@@ -82,6 +81,7 @@ size_t timetotext(char *target, struct maptime *date)
 			date->hour,
 			date->minute,
 			date->second);
+
 	if (target != NULL)
 	{
 		char *str = malloc(time_size);
@@ -98,7 +98,7 @@ size_t timetotext(char *target, struct maptime *date)
 	return time_size;
 }
 
-Bool match_input_type(int choice, struct maptime *date_target)
+Bool match_input_type(long choice, struct maptime *date_target)
 {
 	uint16_t date = 0;
 	switch (choice)

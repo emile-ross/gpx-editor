@@ -1,5 +1,5 @@
 FLAGS = -Wconversion -Wall -Wextra -std=gnu99 -Wpedantic -Wshadow -Wswitch-enum -Wunreachable-code
-CC = clang
+CC = gcc
 
 SOURCE_DIR := src
 filenames := write output current_time config menu input functions main command_parsing time_parsing
@@ -13,7 +13,7 @@ CMD = $(CC) $(FILES) -o medit
 zig: 
 	$(CMD) $(FLAGS)
 base: 
-	$(CMD) $(FLAGS) -Werror -g
+	$(CMD) $(FLAGS) -g -Werror
 
 install: base
 	sudo cp -f medit /usr/bin/

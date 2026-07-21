@@ -15,7 +15,7 @@ int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uin
 		unsigned long remaining_time = time_interval;
 		
 		/* add seconds */
-		track_time->second += remaining_time % 60;
+		track_time->second += (uint8_t)(remaining_time % 60);
 		remaining_time -= remaining_time % 60;
 		
 		if (track_time->second >= 60)
@@ -26,7 +26,7 @@ int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uin
 		
 		/* set minutes */
 		unsigned long mins_to_add = (remaining_time / 60) % 60;
-		track_time->minute += mins_to_add;
+		track_time->minute += (uint8_t)mins_to_add;
 		remaining_time -= mins_to_add * 60;
 		
 		if (track_time->minute >= 60)
@@ -37,7 +37,7 @@ int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uin
 		
 		/* set hours */
 		unsigned long hours_to_add = (remaining_time / (60 * 60)) % 24;
-		track_time->hour += hours_to_add;
+		track_time->hour += (uint8_t)hours_to_add;
 		remaining_time -= hours_to_add * (60 * 60);
 		
 		if (track_time->hour >= 24)
