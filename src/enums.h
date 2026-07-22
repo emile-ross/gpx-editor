@@ -16,3 +16,14 @@ typedef enum
 	False = 0,
 	True = 1
 } Bool;
+
+enum input_types
+{
+	year,
+	month,
+	day,
+	hour,
+	minute,
+	second,
+	undefined
+};

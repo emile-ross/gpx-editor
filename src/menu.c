@@ -1,6 +1,6 @@
 #include "header.h"
 
-Bool match_input_type(long choice, struct maptime *date_target);
+Bool match_input_type(enum input_types choice, struct maptime *date_target);
 
 struct maptime date_input(void)
 {
@@ -98,7 +98,7 @@ size_t timetotext(char *target, struct maptime *date)
 	return time_size;
 }
 
-Bool match_input_type(long choice, struct maptime *date_target)
+Bool match_input_type(enum input_types choice, struct maptime *date_target)
 {
 	uint16_t date = 0;
 	switch (choice)
