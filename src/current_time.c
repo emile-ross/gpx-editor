@@ -1,8 +1,8 @@
 #include "header.h"
 
-Bool in_bounds(int input)
+Bool in_bounds(long input, long upper_bound)
 {
-	if (input > 65535 || input < 0)
+	if (input > upper_bound || input < 0)
 	{
 		err("Out of bounds input");
 		return False;
@@ -21,7 +21,7 @@ struct maptime current_time(void)
 	
 	/* get current year + 1900 because tm struct stores the year from 1900 */
 	int y = cur_time->tm_year;
-	if (in_bounds(y))
+	if (in_bounds(y, UINT16MAX))
 		current_time_m.year = (uint16_t)(1900 + y);
 
 	/* set all other times from tm struct */
