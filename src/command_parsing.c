@@ -2,6 +2,7 @@
 
 int command_parsing(uint8_t *num_args, char *arguments[])
 {
+	struct write_arguments writing_args;
 	uint32_t final_time = 1;
 	uint32_t time_interval_int = 0;
 	struct maptime date = current_time();
@@ -22,6 +23,8 @@ int command_parsing(uint8_t *num_args, char *arguments[])
 				printf("interval mode\n");
 			}
 			time_interval_int = time_parsing(&i, *num_args, arguments);
+			/* TODO: add bounds checking before the following cast */
+			writing_args.time_interval = (int32_t)time_interval_int;
 			printf("Interval time is: %u\n", time_interval_int);
 		}
 		else if (strcmp(arguments[i], "-t") == 0)
@@ -86,6 +89,7 @@ int command_parsing(uint8_t *num_args, char *arguments[])
 
 			bound_check(temp_points, 0, UINT32MAX);
 			num_waypoints = (uint32_t)temp_points;
+			writing_args.num_waypoints = num_waypoints;
 		}
 
 		if (useless_flag)

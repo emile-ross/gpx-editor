@@ -19,3 +19,8 @@ struct write_cmd_args
 	Bool num_waypoints;
 };
 
+struct write_arguments
+{
+	const uint32_t num_waypoints;
+	const int32_t *time_interval;
+};
