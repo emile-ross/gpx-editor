@@ -12,8 +12,8 @@ int forwards_write(struct maptime *track_time, const struct write_arguments *tim
 
 	for (uint32_t i = 0; i < (timeargs->num_waypoints); i++)
 	{
-		unsigned long remaining_time = (unsigned)timeargs->time_interval;
-
+		bound_check(timeargs->time_interval, 0, UINT32MAX);
+		uint64_t remaining_time = (unsigned)timeargs->time_interval;
 		
 		/* add seconds */
 		track_time->second += (uint8_t)(remaining_time % 60);
@@ -35,7 +35,6 @@ int forwards_write(struct maptime *track_time, const struct write_arguments *tim
 			track_time->hour += track_time->minute / 60;
 			track_time->minute %= 60;
 		}
-		
 		/* set hours */
 		unsigned long hours_to_add = (remaining_time / (60 * 60)) % 24;
 		track_time->hour += (uint8_t)hours_to_add;
@@ -43,12 +42,12 @@ int forwards_write(struct maptime *track_time, const struct write_arguments *tim
 		
 		if (track_time->hour >= 24)
 		{
+			bound_check((track_time->hour / 24), 0, UINT8MAX);
 			track_time->day += track_time->hour / 24;
 			track_time->hour %= 24;
 		}
 		
 		/* write to current_entry buffer */
-
 		snprintf(time_table[i], line_size, track_time_template, 
 				track_time->year,
 				track_time->month,
@@ -57,7 +56,6 @@ int forwards_write(struct maptime *track_time, const struct write_arguments *tim
 				track_time->minute,
 				track_time->second);
 	}
-
 
 	if ((timeargs->num_waypoints) == 0)
 	{
@@ -75,6 +73,5 @@ int forwards_write(struct maptime *track_time, const struct write_arguments *tim
 	}
 
 	free(time_table);
-
 	return 0;
 }
