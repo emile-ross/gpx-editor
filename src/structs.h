@@ -21,6 +21,6 @@ struct write_cmd_args
 
 struct write_arguments
 {
-	const uint32_t num_waypoints;
-	const int32_t *time_interval;
+	uint32_t num_waypoints;
+	int32_t time_interval;
 };
