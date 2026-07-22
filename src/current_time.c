@@ -1,16 +1,5 @@
 #include "header.h"
 
-/* in_bounds() is an unused function */
-Bool in_bounds(long input, long upper_bound)
-{
-	if (input > upper_bound || input < 0)
-	{
-		err("Out of bounds input");
-		return False;
-	}
-	return True;
-}
-
 void time_initialisation(struct maptime* initial_time);
 
 struct maptime current_time(void)

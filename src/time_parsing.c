@@ -2,7 +2,7 @@
 
 void parsing_fail(char *time_type_msg);
 
-uint32_t time_parsing(uint8_t *flag_r_index, uint8_t num_args, char *argument[])
+uint32_t time_parsing(uint8_t *flag_r_index, const uint8_t num_args, char *argument[])
 {
 	uint8_t flag_r = (uint8_t)*flag_r_index;
 	uint32_t duration = 0;
@@ -71,7 +71,7 @@ uint32_t time_parsing(uint8_t *flag_r_index, uint8_t num_args, char *argument[])
 
 		if (valid_arg)
 		{
-			if (*endptr != '\0')
+			if (*(endptr) != '\0')
 			{
 				fprintf(stderr, "error converting \"%s\" to a number\n", endptr);
 			}

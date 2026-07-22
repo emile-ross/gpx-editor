@@ -1,4 +1,4 @@
-typedef struct maptime
+struct maptime
 {
 	uint16_t year;
 	uint8_t month;
@@ -6,7 +6,7 @@ typedef struct maptime
 	uint8_t hour;
 	uint8_t minute;
 	uint8_t second;
-} MapTime;
+};
 
 struct maptime current_time(void);
 struct maptime date_input(void);
