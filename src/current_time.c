@@ -10,6 +10,15 @@ Bool in_bounds(long input, long upper_bound)
 	return True;
 }
 
+void assrt(int expr)
+{
+	if (!expr)
+	{
+		fprintf(stderr, "Assertion failed (integer is out of bounds)\n");
+		exit(1);
+	}
+}
+
 void time_initialisation(struct maptime* initial_time);
 
 struct maptime current_time(void)
