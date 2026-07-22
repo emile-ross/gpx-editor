@@ -104,3 +104,12 @@ Bool sufficient_args(struct write_cmd_args command_data)
 	
 	return False;
 }
+
+void assrt(int expr)
+{
+	if (!expr)
+	{
+		fprintf(stderr, "Assertion failed (integer is out of bounds)\n");
+		exit(1);
+	}
+}

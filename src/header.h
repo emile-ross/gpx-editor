@@ -24,18 +24,21 @@
 void err(const char *restrict format, ...);
 void warn(const char *restrict format, ...);
 
-void clear(void);
 Bool conversion_check(const char *endptr, const char *input_string, const Bool newline);
-void wait(long quarters, long seconds);	/* waits for a certain time */
 int command_parsing(uint8_t *num_args, char *arguments[]);
 
-uint32_t time_parsing(uint8_t *flag_r_index, uint8_t num_args, char *argument[]);
+uint32_t time_parsing(uint8_t *flag_r_index, const uint8_t num_args, char *argument[]);
 uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, Bool eight_bit_conversion);
 Bool bound_check(int64_t val, int64_t lb, int64_t ub);
 
-void stotime(unsigned long total_seconds, uint8_t *hours, uint8_t *minutes, uint8_t *seconds);
+/* functions.c */
+	void assrt(int expr);
+	void clear(void);
+	void stotime(unsigned long total_seconds, uint8_t *hours, uint8_t *minutes, uint8_t *seconds);
+	void wait(long quarters, long seconds);	/* waits for a certain time */
+	Bool sufficient_args(struct write_cmd_args command_data);
+
 
 size_t timetotext(char *target, struct maptime *date);
 int forwards_write(struct maptime *track_time, const struct write_arguments *timeargs);
 
-Bool sufficient_args(struct write_cmd_args command_data);
