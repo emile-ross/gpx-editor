@@ -36,6 +36,6 @@ Bool bound_check(int64_t val, int64_t lb, int64_t ub);
 void stotime(unsigned long total_seconds, uint8_t *hours, uint8_t *minutes, uint8_t *seconds);
 
 size_t timetotext(char *target, struct maptime *date);
-int forwards_write(struct maptime *track_time, uint32_t *num_waypoints, const uint32_t time_interval);
+int forwards_write(struct maptime *track_time, uint32_t *num_waypoints, const uint32_t *time_interval);
 
 Bool sufficient_args(struct write_cmd_args command_data);
