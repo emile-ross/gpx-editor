@@ -34,10 +34,15 @@ struct maptime current_time(void)
 		current_time_m.year = (uint16_t)(1900 + y);
 
 	/* set all other times from tm struct */
+	assrt(UINT8MAX > cur_time->tm_mon);
 	current_time_m.month = 1 + (uint8_t)cur_time->tm_mon;
+	assrt(UINT8MAX > cur_time->tm_mday);
 	current_time_m.day = (uint8_t)cur_time->tm_mday;
+	assrt(UINT8MAX > cur_time->tm_hour);
 	current_time_m.hour = (uint8_t)cur_time->tm_hour;
+	assrt(UINT8MAX > cur_time->tm_min);
 	current_time_m.minute = (uint8_t)cur_time->tm_min;
+	assrt(UINT8MAX > cur_time->tm_sec);
 	current_time_m.second = (uint8_t)cur_time->tm_sec;
 
 	return current_time_m;
