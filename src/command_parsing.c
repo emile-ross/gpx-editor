@@ -2,12 +2,14 @@
 
 int command_parsing(uint8_t *num_args, char *arguments[])
 {
-	struct write_arguments writing_args;
 	uint32_t final_time = 1;
 	uint32_t time_interval_int = 0;
 	struct maptime date = current_time();
 	uint32_t num_waypoints = 0;
 	uint8_t num_seconds, num_minutes, num_hours;
+
+
+	struct write_arguments writing_args;
 	struct write_cmd_args command_data;
 
 	for (uint8_t i = 0; i < *num_args; i++)
@@ -104,7 +106,8 @@ int command_parsing(uint8_t *num_args, char *arguments[])
 	printf("seconds: %d\nminutes: %d\nhours: %d\n", num_seconds, num_minutes, num_hours);
 	if (sufficient_args(command_data))
 	{
-		forwards_write(&date, &num_waypoints, &time_interval_int);
+		const struct write_arguments forwards_write_args = writing_args;
+		forwards_write(&date, &forwards_write_args);
 	}
 	else
 	{
