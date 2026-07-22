@@ -1,5 +1,6 @@
 #include "header.h"
 
+/* in_bounds() is an unused function */
 Bool in_bounds(long input, long upper_bound)
 {
 	if (input > upper_bound || input < 0)
@@ -29,11 +30,12 @@ struct maptime current_time(void)
 	time_initialisation(&current_time_m);
 	
 	/* get current year + 1900 because tm struct stores the year from 1900 */
-	assrt(UINT16MAX > (cur_time->tm_year + 1900));
-	current_time_m.year = (uint16_t)(cur_time->tm_year + 1900);
+	int temp_y = cur_time->tm_year + 1900;
+	assrt(UINT16MAX > temp_y && 0 <= temp_y);
+	current_time_m.year = (uint16_t)temp_y;
 
 	/* set all other times from tm struct */
-	assrt(UINT8MAX > cur_time->tm_mon);
+	assrt(UINT8MAX > (1 + cur_time->tm_mon));
 	current_time_m.month = 1 + (uint8_t)cur_time->tm_mon;
 	assrt(UINT8MAX > cur_time->tm_mday);
 	current_time_m.day = (uint8_t)cur_time->tm_mday;
