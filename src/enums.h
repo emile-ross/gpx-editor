@@ -19,11 +19,12 @@ typedef enum
 
 enum input_types
 {
+	exit_menu,
 	year,
 	month,
 	day,
 	hour,
 	minute,
 	second,
-	undefined
+	undefined,
 };

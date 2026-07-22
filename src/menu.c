@@ -136,6 +136,7 @@ Bool match_input_type(enum input_types choice, struct maptime *date_target)
 			break;
 
 		case undefined:
+		case exit_menu:
 		default:
 			return False;
 			break;
