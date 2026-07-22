@@ -14,7 +14,7 @@ struct maptime date_input(void)
 	enum input_types input_type = undefined;
 	Bool valid_choice = False;
 
-	while (choice != 0)
+	while (choice != exit_menu)
 	{
 		clear();
 		if (first_input)
@@ -29,14 +29,14 @@ struct maptime date_input(void)
 		printf("Date: %s\n", time_string);
 		free(time_string);
 
-		printf("Edit Year:    1\n");
-		printf("Edit Months:  2\n");
-		printf("Edit Days:    3\n");
-		printf("Edit Hours:   4\n");
-		printf("Edit Minutes: 5\n");
-		printf("Edit Seconds: 6\n");
+		printf("Edit Year:    %d\n", year);
+		printf("Edit Months:  %d\n", month);
+		printf("Edit Days:    %d\n", day);
+		printf("Edit Hours:   %d\n", hour);
+		printf("Edit Minutes: %d\n", minute);
+		printf("Edit Seconds: %d\n", second);
 
-		printf("\nSave and exit:  0\n");
+		printf("\nSave and exit: %d\n", exit_menu);
 
 		char buffer[100];
 		if (fgets(buffer, sizeof(buffer), stdin) == NULL)
