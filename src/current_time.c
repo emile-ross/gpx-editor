@@ -29,9 +29,8 @@ struct maptime current_time(void)
 	time_initialisation(&current_time_m);
 	
 	/* get current year + 1900 because tm struct stores the year from 1900 */
-	int y = cur_time->tm_year;
-	if (in_bounds(y, UINT16MAX))
-		current_time_m.year = (uint16_t)(1900 + y);
+	assrt(UINT16MAX > (cur_time->tm_year + 1900));
+	current_time_m.year = (uint16_t)(cur_time->tm_year + 1900);
 
 	/* set all other times from tm struct */
 	assrt(UINT8MAX > cur_time->tm_mon);
