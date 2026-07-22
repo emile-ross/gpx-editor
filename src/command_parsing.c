@@ -100,7 +100,7 @@ int command_parsing(uint8_t *num_args, char *arguments[])
 	printf("seconds: %d\nminutes: %d\nhours: %d\n", num_seconds, num_minutes, num_hours);
 	if (sufficient_args(command_data))
 	{
-		forwards_write(&date, num_waypoints, time_interval_int);
+		forwards_write(&date, &num_waypoints, time_interval_int);
 	}
 	else
 	{

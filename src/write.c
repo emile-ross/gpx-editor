@@ -2,15 +2,15 @@
 
 const Bool error_checking = True;
 
-int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uint32_t time_interval)
+int forwards_write(struct maptime *track_time, uint32_t *num_waypoints, const uint32_t time_interval)
 {
 	const char *track_time_template = "<when>%u-%u-%uT%02u:%02u:%02uZ</when>";
 	const size_t max_line_length = 128;	/* max length in valid characters (from <when> to </when>) */
 	const size_t line_size = max_line_length + 1;	/* account for NULL terminator */
 
-	char (*time_table)[line_size] = malloc(line_size*num_waypoints);
+	char (*time_table)[line_size] = malloc(( line_size * *(num_waypoints) ));
 
-	for (uint32_t i = 0; i < num_waypoints; i++)
+	for (uint32_t i = 0; i < *(num_waypoints); i++)
 	{
 		unsigned long remaining_time = time_interval;
 		
@@ -58,7 +58,7 @@ int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uin
 	}
 
 
-	if (num_waypoints == 0)
+	if (*(num_waypoints) == 0)
 	{
 		printf("warning: skipping the printing (0 waypoints specified)\n");
 	}
@@ -68,7 +68,7 @@ int forwards_write(struct maptime *track_time, uint32_t num_waypoints, const uin
 		printf("warning: skipping the incrementing of the date (the interval is 0)\n");
 	}
 
-	for (uint32_t i = 0; i < num_waypoints; i++)
+	for (uint32_t i = 0; i < *(num_waypoints); i++)
 	{
 		printf("%s\n", time_table[i]);
 	}
