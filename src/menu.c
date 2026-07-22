@@ -11,6 +11,7 @@ struct maptime date_input(void)
 	final_time.second = 0;	/* seconds are set to 0 by default */
 
 	long choice = -1;
+	enum input_types input_type = undefined;
 	Bool valid_choice = False;
 
 	while (choice != 0)
@@ -57,7 +58,8 @@ struct maptime date_input(void)
 
 			if (valid_choice)
 			{
-				valid_choice = match_input_type(choice, &final_time);
+				input_type = (enum input_types)choice;
+				valid_choice = match_input_type(input_type, &final_time);
 
 				if (valid_choice)
 				{
@@ -103,36 +105,37 @@ Bool match_input_type(enum input_types choice, struct maptime *date_target)
 	uint16_t date = 0;
 	switch (choice)
 	{
-		case 1:
+		case year:
 			date = get_time(0, 65535, "year", False);
 			date_target->year = date;
 			break;
 	
-		case 2:
+		case month:
 			date = get_time(1, 12, "months", True);
 			date_target->month = (uint8_t)date;
 			break;
 			
-		case 3:
+		case day:
 			date = get_time(1, 31, "days", True);
 			date_target->day = (uint8_t)date;
 			break;
 	
-		case 4:
+		case hour:
 			date = get_time(0, 23, "hours", True);
 			date_target->hour = (uint8_t)date;
 			break;
 	
-		case 5:
+		case minute:
 			date = get_time(0, 59, "minutes", True);
 			date_target->minute = (uint8_t)date;
 			break;
 	
-		case 6:
+		case second:
 			date = get_time(0, 59, "seconds", True);
 			date_target->second = (uint8_t)date;
 			break;
-	
+
+		case undefined:
 		default:
 			return False;
 			break;
