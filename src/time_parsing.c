@@ -35,7 +35,7 @@ int32_t time_parsing(uint8_t *flag_r_index, const uint8_t num_args, char *argume
 			if (bound_check(date_arg, 0, 59))
 			{
 				num_valid_args++;
-				duration += (uint32_t)date_arg;
+				duration += (int32_t)date_arg;
 			}
 		}
 		else if (strcmp(argument[i], "-M") == 0)
@@ -50,7 +50,7 @@ int32_t time_parsing(uint8_t *flag_r_index, const uint8_t num_args, char *argume
 			if (bound_check(date_arg, 0, 59))
 			{
 				num_valid_args++;
-				duration += (uint32_t)(60 * date_arg);
+				duration += (int32_t)(60 * date_arg);
 			}
 		}
 		else if (strcmp(argument[i], "-H") == 0)
@@ -65,7 +65,7 @@ int32_t time_parsing(uint8_t *flag_r_index, const uint8_t num_args, char *argume
 			if (bound_check((3600 * date_arg), 0, UINT32MAX))
 			{
 				num_valid_args++;
-				duration += (uint32_t)(3600 * date_arg);
+				duration += (int32_t)(3600 * date_arg);
 			}
 		}
 
@@ -83,9 +83,8 @@ int32_t time_parsing(uint8_t *flag_r_index, const uint8_t num_args, char *argume
 		warn("No values were provided,\nTime set to 0 (default)");
 	}
 
-	bound_check(duration, 0, UINT32MAX);
-	uint32_t val = (uint32_t)duration;
-	return val;
+	bound_check(duration, (0-INT32MAX), INT32MAX);
+	return duration;
 }
 
 
