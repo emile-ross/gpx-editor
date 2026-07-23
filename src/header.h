@@ -35,7 +35,7 @@ Bool bound_check(int64_t val, int64_t lb, int64_t ub);
 /* functions.c */
 	void assrt(int expr);
 	void clear(void);
-	void stotime(unsigned long total_seconds, uint8_t *hours, uint8_t *minutes, uint8_t *seconds);
+	void stotime(long total_seconds, int8_t *hours, int8_t *minutes, int8_t *seconds);
 	void wait(long quarters, long seconds);	/* waits for a certain time */
 	Bool sufficient_args(struct write_cmd_args command_data);
 

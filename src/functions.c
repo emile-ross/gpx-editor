@@ -1,18 +1,18 @@
 #include "header.h"
 
-void stotime(unsigned long total_seconds, uint8_t *hours, uint8_t *minutes, uint8_t *seconds)
+void stotime(long total_seconds, int8_t *hours, int8_t *minutes, int8_t *seconds)
 {
-	unsigned long seconds_remainder = total_seconds % 60;
+	long seconds_remainder = total_seconds % 60;
 	/* this cast is correct because we have a modulus operator
 	 * with 60, guaranteeing a value less than 60 */
-	*seconds = (uint8_t)seconds_remainder;	
+	*seconds = (int8_t)seconds_remainder;	
 
-	unsigned long minutes_pre_remainder = total_seconds - seconds_remainder;
-	unsigned long minutes_remainder = minutes_pre_remainder % 3600;
-	*minutes = (uint8_t)(minutes_remainder / 60);
+	long minutes_pre_remainder = total_seconds - seconds_remainder;
+	long minutes_remainder = minutes_pre_remainder % 3600;
+	*minutes = (int8_t)(minutes_remainder / 60);
 
-	unsigned long hours_temp = minutes_pre_remainder - minutes_remainder;
-	*hours = (uint8_t)(hours_temp / 3600);
+	long hours_temp = minutes_pre_remainder - minutes_remainder;
+	*hours = (int8_t)(hours_temp / 3600);
 }
 
 void clear(void)

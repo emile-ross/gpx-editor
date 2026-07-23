@@ -6,7 +6,7 @@ int command_parsing(uint8_t *num_args, char *arguments[])
 	int32_t time_interval_int = 0;
 	struct maptime date = current_time();
 	uint32_t num_waypoints = 0;
-	uint8_t num_seconds, num_minutes, num_hours;
+	int8_t num_seconds, num_minutes, num_hours;
 
 
 	struct write_arguments writing_args;
