@@ -2,10 +2,10 @@
 
 void parsing_fail(char *time_type_msg);
 
-uint32_t time_parsing(uint8_t *flag_r_index, const uint8_t num_args, char *argument[])
+int32_t time_parsing(uint8_t *flag_r_index, const uint8_t num_args, char *argument[])
 {
 	uint8_t flag_r = (uint8_t)*flag_r_index;
-	uint32_t duration = 0;
+	int32_t duration = 0;
 	uint8_t num_valid_args = 0;
 
 	for (uint8_t i = flag_r; i < num_args; i++)

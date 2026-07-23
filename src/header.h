@@ -12,6 +12,7 @@
 
 #define UINT8MAX (255)
 #define UINT16MAX (65535)
+#define INT32MAX (2147483647)
 #define UINT32MAX (4294967295)
 
 #define max_num_args (255)
@@ -27,7 +28,7 @@ void warn(const char *restrict format, ...);
 Bool conversion_check(const char *endptr, const char *input_string, const Bool newline);
 int command_parsing(uint8_t *num_args, char *arguments[]);
 
-uint32_t time_parsing(uint8_t *flag_r_index, const uint8_t num_args, char *argument[]);
+int32_t time_parsing(uint8_t *flag_r_index, const uint8_t num_args, char *argument[]);
 uint16_t get_time(uint16_t lower_bound, uint16_t upper_bound, char *date_type, Bool eight_bit_conversion);
 Bool bound_check(int64_t val, int64_t lb, int64_t ub);
 
